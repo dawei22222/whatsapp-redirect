@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Chat</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Redirect</title>
   <style>
-    body { text-align: center; font-family: sans-serif; padding: 30px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
     .btn {
-      padding: 12px 24px;
-      font-size: 18px;
-      margin-top: 30px;
+      padding: 14px 28px;
       background-color: #25D366;
       color: white;
+      font-size: 18px;
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 6px;
+      margin-top: 30px;
+    }
+    .tip {
+      font-size: 16px;
+      margin-top: 20px;
+      color: #333;
     }
   </style>
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const isTikTok = /tiktok/.test(ua);
+
+    window.onload = function () {
+      if (!(isIOS && isTikTok)) {
+        // 非 iOS TikTok 打开，自动跳转
+        window.location.href = "https://wa.me/85298507421";
+      }
+    }
+  </script>
 </head>
 <body>
-  <h2>To chat with me, click below</h2>
-  <button class="btn" onclick="window.location.href='go.html'">
-    👉 Click here to chat with me
+  <h2>⚠️ Please open this page in Safari browser</h2>
+  <p>To continue chatting on WhatsApp</p>
+  <div class="tip">Click the button below to continue:</div>
+  <button class="btn" onclick="window.location.href='https://wa.me/85298507421'">
+    👉 Click to chat on WhatsApp
   </button>
 </body>
 </html>
