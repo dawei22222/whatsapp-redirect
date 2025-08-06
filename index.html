@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>正在跳转到 WhatsApp...</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Redirecting...</title>
   <style>
-    body {
-      text-align: center;
-      font-family: Arial, sans-serif;
-      padding: 50px 20px;
-    }
-    .arrow {
-      width: 100px;
-      margin-top: 20px;
-    }
+    body{margin:0;padding:20px;font-family:sans-serif;text-align:center;}
+    .arrow{width:80px;margin-top:20px;}
+    button{padding:10px 20px;font-size:16px;background:#25D366;color:#fff;border:none;border-radius:6px;}
   </style>
 </head>
 <body>
-  <div id="notice" style="display: none;">
-    <h3>请点击右上角</h3>
-    <p>在浏览器（如 Safari）中打开本页面，以继续跳转 WhatsApp</p>
-    <img class="arrow" src="https://magicclick.icu/arrow-tip.png" alt="打开提示箭头" />
+  <div id="notice" style="display:none;">
+    <p>Please tap the top-right menu and select <strong>“Open in Safari”</strong> to continue.</p>
+    <img class="arrow" src="https://yourcdn.com/arrow-tip.png" alt="Arrow pointing to open in Safari"/>
   </div>
-
   <script>
-    const isTikTok = navigator.userAgent.toLowerCase().includes("tiktok");
-
-    if (isTikTok) {
-      document.getElementById("notice").style.display = "block";
+    const ua = navigator.userAgent.toLowerCase();
+    const isTikTok = ua.includes("tiktok");
+    const target = "https://wa.me/85298507421";
+    if (!isTikTok) {
+      window.location.href = target;
     } else {
-      // 非 TikTok 浏览器，自动跳转
-      window.location.href = "https://api.whatsapp.com/send?phone=85298507421";
+      document.getElementById("notice").style.display = "block";
     }
   </script>
 </body>
