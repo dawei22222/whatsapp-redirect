@@ -3,59 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Redirecting to WhatsApp...</title>
+  <title>Redirecting...</title>
+  <script>
+    function isIOSInAppBrowser() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      return /iPhone|iPad|iPod/.test(ua) && /TikTok/.test(ua);
+    }
+
+    function isAndroidInAppBrowser() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      return /Android/.test(ua) && /TikTok/.test(ua);
+    }
+
+    window.onload = function () {
+      const whatsappUrl = "https://wa.me/xxxxxxxxxxx"; // 填写你的 WhatsApp 链接
+
+      if (isIOSInAppBrowser()) {
+        // iOS 内置浏览器提示
+        document.getElementById("tip").style.display = "block";
+      } else {
+        // 安卓/其他，直接跳转
+        window.location.href = whatsappUrl;
+      }
+    }
+  </script>
   <style>
     body {
-      background-color: #fdf1e6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
       font-family: Arial, sans-serif;
-      padding: 30px;
+      background: #fff8e1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
     }
-    h1 {
-      font-size: 20px;
-      margin-bottom: 20px;
+    #tip {
+      display: none;
+      font-size: 18px;
       color: #333;
-    }
-    .tip {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #444;
-    }
-    .highlight {
-      font-weight: bold;
-      color: #000;
+      line-height: 1.8;
     }
   </style>
 </head>
 <body>
-
-  <h1>How to continue to WhatsApp</h1>
-  <div class="tip">
-    If you are seeing this page inside TikTok:<br/><br/>
-    Please tap the <span class="highlight">"···"</span> button in the top-right corner,<br/>
-    and choose <span class="highlight">"Open in browser"</span><br/><br/>
-    如果你在 TikTok 中看到这个页面：<br/>
-    请点击右上角的 <span class="highlight">“···”</span>，然后选择 <span class="highlight">“在浏览器中打开”</span>
+  <div id="tip">
+    请点击右上角“...”<br>选择“用浏览器打开”<br><br>
+    Then click again to enter WhatsApp
   </div>
-
-  <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-    const isTikTok = ua.includes("tiktok");
-
-    const whatsappLink = "https://wa.me/1234567890"; // ← 请替换为你的 WhatsApp 链接
-
-    if (!isTikTok || !isIOS) {
-      // 非 TikTok 或 安卓，自动跳转
-      window.location.href = whatsappLink;
-    }
-    // iOS TikTok 内停留，展示提示
-  </script>
-
 </body>
 </html>
