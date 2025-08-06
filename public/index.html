@@ -2,99 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat on WhatsApp</title>
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: #fff;
-      color: #000;
-      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fff;
     }
 
-    .tip-banner {
+    .tip-bar {
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      text-align: center;
+      padding: 12px 16px 16px 16px;
+      font-size: 15px;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.75);
-      color: #fff;
-      padding: 12px 10px 10px;
-      box-sizing: border-box;
-      z-index: 9999;
+      right: 0;
+      z-index: 999;
     }
 
-    .tip-banner svg {
-      width: 60px;
-      height: auto;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-    }
-
-    .tip-banner p {
-      font-size: 14px;
-      margin: 0;
-      line-height: 1.5;
+    .arrow-img {
+      display: block;
+      margin: 12px auto 0 auto;
+      width: 40px;
     }
 
     .content {
-      margin-top: 120px;
+      padding-top: 130px;
+      text-align: center;
     }
 
     .wa-number {
+      margin: 30px 0 10px 0;
       font-size: 16px;
-      margin: 20px 0;
+      color: #333;
     }
 
-    .wa-number strong {
-      font-size: 22px;
+    .wa-num-bold {
+      font-weight: bold;
+      font-size: 20px;
     }
 
     .btn {
-      display: inline-block;
+      margin-top: 50px;
+      width: 90%;
+      max-width: 350px;
+      padding: 14px;
+      font-size: 17px;
       background-color: #25D366;
-      color: #fff;
-      padding: 14px 28px;
-      font-size: 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      margin: 40px 0;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<div class="tip-banner" id="iosTip">
-  <svg viewBox="0 0 100 100">
-    <path d="M10,90 Q95,30 85,10" stroke="red" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
-    <defs>
-      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-        <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
-      </marker>
-    </defs>
-  </svg>
-  <p>Click the top right "..."<br>then choose <strong>"Open in browser"</strong></p>
-</div>
-
-<div class="content">
-  <div class="wa-number">
-    or copy my WhatsApp number:<br>
-    <strong>+1234567890</strong>
+  <div class="tip-bar">
+    点击右上角按钮<br>然后在弹出的菜单中点击“在浏览器中打开”
+    <img class="arrow-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAACuX0G/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA9UlEQVR4nMWUwQnDIAwFh7ITtHwFxwAdLFBFAN1cQBJwAfJJID3obgHTxY+v77LwCA9J1zQphuXWTtEtFuSxP3+goy7J5C2tRoqFDhAsv5ZXOmPA4JrwYzCQXDcV13z6xN8L1U1RTov13A+pgYWEGVQWWfMmpn1lqAVuj1IZ8AZzS9Fn1vAiYOn3mFzQgoaD0BhiAhPMZsbUe+x7FEt/4y8B+BRRw8TWmNIAAAAASUVORK5CYII=" alt="arrow">
   </div>
 
-  <a class="btn" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
-</div>
-
-<script>
-  // 隐藏提示框：除非是 iPhone Safari 内嵌（如 TikTok）
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const isInApp = /TikTok|FBAV|FBAN|Instagram/i.test(navigator.userAgent);
-  if (!(isIOS && isInApp)) {
-    document.getElementById('iosTip').style.display = 'none';
-  }
-</script>
+  <div class="content">
+    <p class="wa-number">or copy my WhatsApp number:</p>
+    <p class="wa-num-bold">+1234567890</p>
+    <a href="https://wa.me/1234567890" target="_blank">
+      <button class="btn">Add me on WhatsApp</button>
+    </a>
+  </div>
 
 </body>
 </html>
