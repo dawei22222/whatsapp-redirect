@@ -1,46 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to WhatsApp...</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 60px 20px;
-        }
-        #tiktok-instruction {
-            display: none;
-        }
-        .arrow {
-            margin-top: 30px;
-        }
-        img {
-            width: 60%;
-            max-width: 300px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirecting...</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    img {
+      max-width: 90%;
+      margin-top: 20px;
+    }
+    .tip {
+      font-size: 18px;
+      padding: 20px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div id="tiktok-instruction">
-        <h2>To continue, please open in Safari</h2>
-        <p>Tap the <strong>••• or arrow</strong> icon in the top-right corner,<br>then choose <strong>“Open in Safari”</strong>.</p>
-        <div class="arrow">
-            <img src="https://i.imgur.com/ZcL8JPG.png" alt="Tap here to open in Safari">
-        </div>
-    </div>
+  <div class="tip" id="tip">
+    请点击右上角，在浏览器中打开本页面（如 Safari），以继续跳转 WhatsApp。
+  </div>
+  <img src="arrow-tip.png" alt="请用浏览器打开"/>
 
-    <script>
-        const userAgent = navigator.userAgent.toLowerCase();
-        const isTikTok = userAgent.includes("tiktok");
-        
-        if (isTikTok) {
-            document.getElementById("tiktok-instruction").style.display = "block";
-        } else {
-            window.location.href = "https://wa.me/85298507421";
-        }
-    </script>
+  <button id="goBtn" style="display:none;">继续跳转 WhatsApp</button>
+
+  <script>
+    const isInTikTok = navigator.userAgent.toLowerCase().includes('tiktok');
+    const whatsappURL = 'https://wa.me/85298507421';
+
+    if (!isInTikTok) {
+      // 正常浏览器自动跳转
+      window.location.href = whatsappURL;
+    } else {
+      // TikTok 内显示提示图和按钮
+      document.getElementById('goBtn').style.display = 'inline-block';
+      document.getElementById('goBtn').addEventListener('click', () => {
+        window.location.href = whatsappURL;
+      });
+    }
+  </script>
 </body>
 </html>
