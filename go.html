@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat on WhatsApp</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       margin: 0;
+      padding: 0 20px;
       text-align: center;
     }
-    .button {
-      margin-top: 20px;
-      padding: 14px 26px;
-      font-size: 20px;
-      background-color: #25d366;
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 14px 30px;
+      font-size: 18px;
+      background-color: #25D366;
       color: white;
       border: none;
       border-radius: 6px;
@@ -30,10 +39,8 @@
   </style>
 </head>
 <body>
-  <h2>👋 Let’s chat privately</h2>
+  <h1>👋 Let’s chat privately</h1>
   <p>Click the button below to start chatting on WhatsApp</p>
-  <a class="button" href="https://wa.me/15551234567" target="_blank">
-    Chat on WhatsApp
-  </a>
+  <a href="https://wa.me/15551234567" target="_blank" class="btn">Chat on WhatsApp</a>
 </body>
 </html>
