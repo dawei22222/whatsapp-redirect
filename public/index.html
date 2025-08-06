@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Chat on WhatsApp</title>
   <style>
     body {
@@ -32,7 +33,7 @@
       font-size: 18px;
       font-weight: 500;
       padding: 0 20px;
-      margin-top: 20vh;
+      margin-top: 22vh;
       line-height: 1.6;
       color: #333;
     }
@@ -45,24 +46,34 @@
       border-radius: 8px;
       font-weight: bold;
       margin-top: 40px;
+      display: none;
     }
   </style>
-  <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isTikTokIOS = ua.includes("tiktok") && (ua.includes("iphone") || ua.includes("ipad"));
-
-    if (!isTikTokIOS) {
-      window.location.href = "https://wa.me/1234567890"; // 👈 替换为你的 WhatsApp 链接
-    }
-  </script>
 </head>
 <body>
   <img class="arrow" src="https://i.imgur.com/L5YxtVa.png" alt="arrow" />
-  <div class="message">
+  <div class="message" id="tip" style="display:none;">
     Please tap the <strong>"..."</strong> in the top right corner,<br>
     then choose <strong>"Open in browser"</strong>.<br><br>
     After that, click the button below to chat with me on WhatsApp.
   </div>
-  <a class="btn" href="https://wa.me/1234567890" target="_blank">Chat on WhatsApp</a>
+  <a class="btn" id="btn" href="https://wa.me/1234567890" target="_blank">Chat on WhatsApp</a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ua = navigator.userAgent.toLowerCase();
+      const isTikTok = ua.includes("tiktok");
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+
+      if (isTikTok && isIOS) {
+        // iOS + TikTok 内打开 → 展示提示页
+        document.getElementById("tip").style.display = "block";
+        document.getElementById("btn").style.display = "inline-block";
+      } else {
+        // 其他情况 → 自动跳转
+        window.location.href = "https://wa.me/1234567890";
+      }
+    });
+  </script>
 </body>
 </html>
