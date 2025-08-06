@@ -1,115 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chat on WhatsApp</title>
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: #fff;
+      color: #000;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      justify-content: space-between;
     }
 
-    .arrow-container {
-      position: relative;
-      height: 120px;
-      margin-top: 20px;
-    }
-
-    .arrow {
-      width: 80px;
-      height: 80px;
-      position: absolute;
+    .tip-banner {
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 12px 10px 10px;
+      box-sizing: border-box;
+      z-index: 9999;
+    }
+
+    .tip-banner svg {
+      width: 60px;
+      height: auto;
+      position: absolute;
+      top: 10px;
       right: 20px;
     }
 
-    .text-box {
-      padding: 0 20px;
-      margin-top: 10px;
+    .tip-banner p {
+      font-size: 14px;
+      margin: 0;
+      line-height: 1.5;
     }
 
-    .text-box p {
-      font-size: 16px;
-      line-height: 1.5;
-      font-weight: 500;
+    .content {
+      margin-top: 120px;
     }
 
     .wa-number {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 10px 0;
+      font-size: 16px;
+      margin: 20px 0;
     }
 
-    .btn-container {
-      padding: 20px;
+    .wa-number strong {
+      font-size: 22px;
     }
 
-    .wa-button {
+    .btn {
+      display: inline-block;
       background-color: #25D366;
       color: #fff;
-      border: none;
-      padding: 15px;
-      width: 100%;
-      max-width: 300px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    svg path {
-      stroke: red;
-      stroke-width: 3;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin: 40px 0;
     }
   </style>
 </head>
 <body>
-  <div>
-    <div class="arrow-container">
-      <!-- 弯曲 SVG 箭头，指向右上角 -->
-      <svg class="arrow" viewBox="0 0 100 100">
-        <path d="M10,90 Q90,10 90,10 M80,10 L90,10 L90,20" />
-      </svg>
-    </div>
 
-    <div class="text-box">
-      <p>Click the top right "..."<br>then choose <b>"Open in browser"</b></p>
-      <p class="wa-number">+2222222222</p>
-    </div>
+<div class="tip-banner" id="iosTip">
+  <svg viewBox="0 0 100 100">
+    <path d="M10,90 Q95,30 85,10" stroke="red" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
+      </marker>
+    </defs>
+  </svg>
+  <p>Click the top right "..."<br>then choose <strong>"Open in browser"</strong></p>
+</div>
+
+<div class="content">
+  <div class="wa-number">
+    or copy my WhatsApp number:<br>
+    <strong>+1234567890</strong>
   </div>
 
-  <div class="btn-container">
-    <a id="wa-link" class="wa-button" href="https://wa.me/1234567890" target="_blank">
-      Add me on WhatsApp
-    </a>
-  </div>
+  <a class="btn" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
+</div>
 
-  <script>
-    function isIOS() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
+<script>
+  // 隐藏提示框：除非是 iPhone Safari 内嵌（如 TikTok）
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isInApp = /TikTok|FBAV|FBAN|Instagram/i.test(navigator.userAgent);
+  if (!(isIOS && isInApp)) {
+    document.getElementById('iosTip').style.display = 'none';
+  }
+</script>
 
-    function isAndroid() {
-      return /Android/i.test(navigator.userAgent);
-    }
-
-    window.onload = function () {
-      if (isAndroid()) {
-        // 安卓直接跳转
-        window.location.href = "https://wa.me/1234567890";
-      }
-      // iOS 保持当前页展示提示信息
-    };
-  </script>
 </body>
 </html>
