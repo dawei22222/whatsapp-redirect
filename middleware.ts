@@ -1,13 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const ua = request.headers.get('user-agent') || '';
-  const isTikTok = ua.toLowerCase().includes('tiktok');
-  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const userAgent = request.headers.get('user-agent') || '';
+  const url = request.nextUrl.clone();
 
-  if (isTikTok && isIOS) {
-    return NextResponse.rewrite(new URL('/index.html', request.url));
+  // 如果是 TikTok 内置浏览器，停留 index.html
+  if (userAgent.includes('TikTok')) {
+    url.pathname = '/index.html';
+    return NextResponse.rewrite(url);
   }
 
-  return NextResponse.rewrite(new URL('/go.html', request.url));
+  // 其他浏览器自动跳转 go.html
+  url.pathname = '/go.html';
+  return NextResponse.rewrite(url);
 }
