@@ -2,108 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chat on WhatsApp</title>
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #fff;
+      text-align: center;
       display: flex;
       flex-direction: column;
       height: 100vh;
-      background-color: #fff;
-      color: #111;
+      justify-content: space-between;
     }
-    .arrow-tip {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 160px;
-      background-color: rgba(255, 255, 255, 0.95);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    .arrow-container {
+      position: relative;
+      height: 120px;
+      margin-top: 20px;
     }
-    .arrow-svg {
+
+    .arrow {
       width: 80px;
       height: 80px;
+      position: absolute;
+      top: 0;
+      right: 20px;
     }
-    .arrow-text {
-      margin-top: -10px;
+
+    .text-box {
+      padding: 0 20px;
+      margin-top: 10px;
+    }
+
+    .text-box p {
       font-size: 16px;
-      font-weight: bold;
-      text-align: center;
+      line-height: 1.5;
+      font-weight: 500;
     }
-    .main-content {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+
     .wa-number {
       font-size: 20px;
-      font-weight: 600;
-      margin-top: 12px;
-    }
-    .wa-button {
-      width: 90%;
-      max-width: 320px;
-      margin: 0 auto 30px auto;
-      padding: 15px;
-      background-color: #25D366;
-      color: white;
-      font-size: 18px;
       font-weight: bold;
-      text-align: center;
+      margin: 10px 0;
+    }
+
+    .btn-container {
+      padding: 20px;
+    }
+
+    .wa-button {
+      background-color: #25D366;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      max-width: 300px;
       border-radius: 8px;
-      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    svg path {
+      stroke: red;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
   </style>
 </head>
 <body>
-  <!-- 顶部引导区域 -->
-  <div class="arrow-tip" id="iosTip" style="display: none;">
-    <svg class="arrow-svg" viewBox="0 0 100 100">
-      <path d="M10,90 C50,10 90,10 90,10" stroke="#FF0000" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
-      <defs>
-        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#FF0000"/>
-        </marker>
-      </defs>
-    </svg>
-    <div class="arrow-text">Click the top right "..."<br>then choose "Open in browser"</div>
+  <div>
+    <div class="arrow-container">
+      <!-- 弯曲 SVG 箭头，指向右上角 -->
+      <svg class="arrow" viewBox="0 0 100 100">
+        <path d="M10,90 Q90,10 90,10 M80,10 L90,10 L90,20" />
+      </svg>
+    </div>
+
+    <div class="text-box">
+      <p>Click the top right "..."<br>then choose <b>"Open in browser"</b></p>
+      <p class="wa-number">+2222222222</p>
+    </div>
   </div>
 
-  <!-- 主体内容 -->
-  <div class="main-content">
-    <div>or copy my WhatsApp number:</div>
-    <div class="wa-number">+333333333330</div>
+  <div class="btn-container">
+    <a id="wa-link" class="wa-button" href="https://wa.me/1234567890" target="_blank">
+      Add me on WhatsApp
+    </a>
   </div>
 
-  <!-- 底部按钮 -->
-  <a class="wa-button" id="waLink" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
-
-  <!-- 行为控制脚本 -->
   <script>
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-    const isTikTok = /Tiktok/i.test(ua);
-
-    if (isIOS || isTikTok) {
-      // iOS 不跳转，显示提示
-      document.getElementById('iosTip').style.display = 'flex';
-    } else {
-      // 安卓自动跳转
-      window.location.href = "https://wa.me/1234567890";
+    function isIOS() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
+
+    function isAndroid() {
+      return /Android/i.test(navigator.userAgent);
+    }
+
+    window.onload = function () {
+      if (isAndroid()) {
+        // 安卓直接跳转
+        window.location.href = "https://wa.me/1234567890";
+      }
+      // iOS 保持当前页展示提示信息
+    };
   </script>
 </body>
 </html>
