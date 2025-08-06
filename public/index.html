@@ -8,86 +8,94 @@
     body {
       margin: 0;
       padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: #fffaf5;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #222;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       text-align: center;
+      min-height: 100vh;
       padding: 40px 20px;
+      box-sizing: border-box;
     }
 
-    .arrow {
-      width: 100px;
-      height: 100px;
-      margin-top: 10px;
+    .arrow-svg {
+      width: 160px;
+      height: 160px;
+      margin-top: -20px;
     }
 
     h1 {
       font-size: 18px;
-      margin-top: 40px;
+      font-weight: 600;
+      margin-top: -10px;
     }
 
     p {
       font-size: 16px;
-      margin: 12px 0;
+      margin: 8px 0;
+      line-height: 1.5;
     }
 
-    .whatsapp-number {
-      font-weight: bold;
+    .number {
       font-size: 20px;
+      font-weight: bold;
       color: #000;
-      margin-bottom: 25px;
+      margin: 16px 0;
+      word-break: break-word;
     }
 
     .btn {
+      margin-top: 30px;
       background-color: #25D366;
       color: white;
       font-size: 16px;
       padding: 12px 24px;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
       text-decoration: none;
+      cursor: pointer;
     }
 
     @media (max-width: 480px) {
-      .arrow {
-        width: 80px;
-        height: 80px;
+      .arrow-svg {
+        width: 120px;
+        height: 120px;
       }
     }
   </style>
 </head>
 <body>
-  <svg class="arrow" viewBox="0 0 100 100">
-    <path d="M10,90 Q90,10 90,10" stroke="red" stroke-width="5" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- SVG箭头，精确指向右上角 “...” -->
+  <svg class="arrow-svg" viewBox="0 0 100 100">
     <defs>
       <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
         <polygon points="0 0, 10 3.5, 0 7" fill="red" />
       </marker>
     </defs>
+    <path d="M10,90 Q80,20 95,5" stroke="red" stroke-width="4" fill="none" marker-end="url(#arrowhead)" />
   </svg>
 
   <h1>Please click the top right "..."</h1>
   <p>Then select <strong>"Open in browser"</strong></p>
-  <p>or copy my WhatsApp number:</p>
-  <div class="whatsapp-number">+1234567890</div>
+  <p>or copy my WhatsApp number below:</p>
+  <div class="number">+8888888888888</div>
 
-  <a class="btn" id="waBtn" href="https://wa.me/66666666666">Add me on WhatsApp</a>
+  <a class="btn" href="https://wa.me/1234567890" id="wa-link">Add me on WhatsApp</a>
 
   <script>
-    const isAndroid = /android/i.test(navigator.userAgent);
-    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isTikTok = /tiktok/i.test(navigator.userAgent);
+    const ua = navigator.userAgent.toLowerCase();
+    const isAndroid = ua.includes('android');
+    const isTikTok = ua.includes('tiktok');
+    const isIOS = /iphone|ipad|ipod/.test(ua);
 
     if (isAndroid && !isTikTok) {
-      // 安卓正常跳转
-      window.location.href = 'https://wa.me/66666666';
+      // 安卓且不是在TikTok中打开，自动跳转
+      window.location.href = "https://wa.me/1234567890";
     }
-
-    // iOS + TikTok 不跳转，显示页面
+    // iOS TikTok 等保持当前页面，显示指引
   </script>
 </body>
 </html>
