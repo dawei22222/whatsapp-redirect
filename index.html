@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click to Chat</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #fff8f0;
-      text-align: center;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirecting...</title>
+  <script>
+    function isIos() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
-    .button {
-      margin-top: 20px;
-      padding: 14px 26px;
-      font-size: 20px;
-      background-color: #25d366;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
+
+    function isTikTok() {
+      return /tiktok/i.test(navigator.userAgent);
     }
-  </style>
+
+    window.onload = function () {
+      if (isIos() && isTikTok()) {
+        // iOS + TikTok 内打开
+        document.getElementById("safari-redirect").style.display = "block";
+      } else {
+        // Android 或非 TikTok，直接跳 WhatsApp
+        window.location.href = "https://wa.me/15551234567";
+      }
+    };
+  </script>
 </head>
-<body>
-  <h2>👋 Tap the button below</h2>
-  <p>Please click the button to continue chatting with me</p>
-  <a class="button" href="/go.html">点击和我聊天的按钮</a>
+<body style="font-family: sans-serif; text-align: center; padding: 50px;">
+  <div id="safari-redirect" style="display: none;">
+    <p>Please open this link in Safari to continue chatting on WhatsApp.</p>
+    <button onclick="window.open('go.html', '_blank')" style="padding: 10px 20px; font-size: 16px;">
+      Open in Safari
+    </button>
+  </div>
 </body>
 </html>
