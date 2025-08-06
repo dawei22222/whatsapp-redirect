@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click to Chat</title>
+  <title>Chat on WhatsApp</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #fff8f0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #fff8f0;
       text-align: center;
     }
     .button {
@@ -28,35 +28,12 @@
       text-decoration: none;
     }
   </style>
-  <script>
-    function isIos() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-
-    function isTikTok() {
-      const ua = navigator.userAgent.toLowerCase();
-      return ua.includes('tiktok') || ua.includes('musically');
-    }
-
-    window.onload = function () {
-      const isiOS = isIos();
-      const inTikTok = isTikTok();
-
-      if (!isiOS || !inTikTok) {
-        // 安卓 或 非 TikTok iOS → 直接跳 WhatsApp
-        window.location.href = "https://wa.me/15551234567";
-      } else {
-        // iOS + TikTok → 显示跳转按钮
-        document.getElementById("ios-tip").style.display = "block";
-      }
-    };
-  </script>
 </head>
 <body>
-  <div id="ios-tip" style="display: none;">
-    <h2>👋 Tap the button below</h2>
-    <p>Please click the button to continue chatting with me</p>
-    <a class="button" href="/go.html" target="_blank">点击和我聊天的按钮</a>
-  </div>
+  <h2>👋 Let’s chat privately</h2>
+  <p>Click the button below to start chatting on WhatsApp</p>
+  <a class="button" href="https://wa.me/15551234567" target="_blank">
+    Chat on WhatsApp
+  </a>
 </body>
 </html>
