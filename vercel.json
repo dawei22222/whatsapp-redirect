@@ -1,8 +1,13 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "/redirect.html",
+      "permanent": true
+    },
+    {
       "source": "/r1",
-      "destination": "/redirect.html?name=r1",
+      "destination": "/redirect.html",
       "permanent": true
     }
   ]
