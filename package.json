@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-redirect",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "next build",
+    "start": "next start",
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "next": "13.4.19",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}
