@@ -2,62 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat on WhatsApp</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #fff;
-      color: #333;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       height: 100vh;
+      background-color: #fff;
+      color: #111;
     }
     .arrow-tip {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 140px;
-      background: rgba(255, 255, 255, 0.95);
+      height: 160px;
+      background-color: rgba(255, 255, 255, 0.95);
       z-index: 999;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
       padding-bottom: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .arrow-tip img {
+    .arrow-svg {
       width: 80px;
-      height: auto;
+      height: 80px;
     }
     .arrow-text {
+      margin-top: -10px;
       font-size: 16px;
       font-weight: bold;
-      color: #111;
+      text-align: center;
     }
-
     .main-content {
       padding: 20px;
-      text-align: center;
-      flex-grow: 1;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
     }
     .wa-number {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
       margin-top: 12px;
-      word-break: break-all;
     }
     .wa-button {
-      display: block;
       width: 90%;
+      max-width: 320px;
       margin: 0 auto 30px auto;
       padding: 15px;
       background-color: #25D366;
@@ -68,19 +66,20 @@
       border-radius: 8px;
       text-decoration: none;
     }
-
-    @media (min-width: 768px) {
-      .wa-button {
-        width: 300px;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- iOS提示浮层 -->
+  <!-- 顶部引导区域 -->
   <div class="arrow-tip" id="iosTip" style="display: none;">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAb1BMVEUAAAB9fX3///+AgICgoKDY2Njs7Oz09PTV1dXz8/PZ2dnQ0NDg4OAGBgYfHx8lJSUuLi4wMDAZGRktLS2Ojo5+fn4rKyswMDAZGRnFxcWZmZm3t7elpaXy8vJ6enptbW3Nzc3FxcUqKioXFxcjIyOysrJDQ0PExMTR0dGtpy4mAAAB1UlEQVR4AeXTxXaCMAyF4S+ChTSzqu3d+/9nGgg1x0U+8S/9MC2kpjPmc4+53XyeMhIAKKZUvKLmb0Ip6Q60JVXxEWGWMIke4gh1gLCKLU4QwyhmzBEszWqWEZYi0YQZ8KkFZYgMSxaGrjvCN9KzP2LGMJZbk7RxnEjAwCKKMo1jqGHUYR6QhnHIUMWyUd3UjEAVu8D4qgHdjUxlM1FC9btJp6kiRzFSgfUiOov2UIUSeVBGyf/PAOCPsl5oPBOSwqyrR7VxIp+TwvQ/UEDL1MJ75xckBQPeICStJevZGB1kELmV6Du8vwLE1ALb6sfRf+ZDh/2AFI9eHc/N8AAAAASUVORK5CYII=" alt="arrow" />
-    <div class="arrow-text">Click the top right "..." then choose "Open in browser"</div>
+    <svg class="arrow-svg" viewBox="0 0 100 100">
+      <path d="M10,90 C50,10 90,10 90,10" stroke="#FF0000" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#FF0000"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="arrow-text">Click the top right "..."<br>then choose "Open in browser"</div>
   </div>
 
   <!-- 主体内容 -->
@@ -90,18 +89,19 @@
   </div>
 
   <!-- 底部按钮 -->
-  <a id="waLink" class="wa-button" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
+  <a class="wa-button" id="waLink" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
 
+  <!-- 行为控制脚本 -->
   <script>
     const ua = navigator.userAgent || navigator.vendor || window.opera;
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isTikTok = /Tiktok/i.test(ua);
 
     if (isIOS || isTikTok) {
-      // 显示浮层，不跳转
+      // iOS 不跳转，显示提示
       document.getElementById('iosTip').style.display = 'flex';
     } else {
-      // 非 iOS，自动跳转
+      // 安卓自动跳转
       window.location.href = "https://wa.me/1234567890";
     }
   </script>
