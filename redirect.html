@@ -1,62 +1,46 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body { text-align: center; font-family: sans-serif; padding: 40px; background: #f9f9f9; }
-    .tip { margin-top: 20px; font-size: 16px; color: #333; }
-    .button {
-      margin-top: 25px;
-      padding: 12px 24px;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-      font-size: 16px;
-    }
-    .arrow {
-      margin-top: 30px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to WhatsApp...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        #tiktok-instruction {
+            display: none;
+        }
+        .arrow {
+            margin-top: 30px;
+        }
+        img {
+            width: 60%;
+            max-width: 300px;
+        }
+    </style>
 </head>
 <body>
-  <h2 id="main-title">Redirecting to WhatsApp...</h2>
-
-  <div id="ios-inapp" style="display:none;">
-    <p class="tip">You're using an in-app browser on iPhone (e.g. TikTok or Instagram).</p>
-    <p class="tip"><strong>Please tap the "···" in the top right corner and choose "Open in browser".</strong></p>
-    <div class="arrow">
-      <img src="https://i.imgur.com/OjPxl4Z.png" width="80" alt="arrow" />
+    <div id="tiktok-instruction">
+        <h2>To continue, please open in Safari</h2>
+        <p>Tap the <strong>••• or arrow</strong> icon in the top-right corner,<br>then choose <strong>“Open in Safari”</strong>.</p>
+        <div class="arrow">
+            <img src="https://i.imgur.com/ZcL8JPG.png" alt="Tap here to open in Safari">
+        </div>
     </div>
-    <p class="tip">Once opened in Safari, this page will take you directly to WhatsApp.</p>
-  </div>
 
-  <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-    const isAndroid = /android/.test(ua);
-    const isInApp = /tiktok|fbav|instagram|messenger/.test(ua);
-    const waUrl = "https://wa.me/85298507421";
-
-    if (isAndroid) {
-      // 安卓全自动跳转
-      window.location.href = waUrl;
-    } else if (isIOS) {
-      if (isInApp) {
-        // iPhone 且在 TikTok/FB 内 → 显示引导
-        document.getElementById("ios-inapp").style.display = "block";
-        document.getElementById("main-title").textContent = "Please open in browser";
-      } else {
-        // iPhone Safari / Chrome → 自动跳转
-        window.location.href = waUrl;
-      }
-    } else {
-      // 其他设备（例如 PC）什么都不做
-      document.getElementById("main-title").textContent = "Please open this page on your mobile device.";
-    }
-  </script>
+    <script>
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isTikTok = userAgent.includes("tiktok");
+        
+        if (isTikTok) {
+            document.getElementById("tiktok-instruction").style.display = "block";
+        } else {
+            window.location.href = "https://wa.me/85298507421";
+        }
+    </script>
 </body>
 </html>
