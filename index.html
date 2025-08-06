@@ -10,18 +10,19 @@
     }
 
     function isTikTok() {
-      return /tiktok/i.test(navigator.userAgent);
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      return ua.toLowerCase().includes("tiktok");
     }
 
     window.onload = function () {
-      const inTikTok = isTikTok();
       const isiOS = isIos();
+      const inTikTok = isTikTok();
 
+      // iOS + TikTok 内浏览器：必须引导跳浏览器
       if (isiOS && inTikTok) {
-        // iOS + TikTok，不能直接跳
         document.getElementById("safari-redirect").style.display = "block";
       } else {
-        // Android 或非 TikTok，可以直接跳
+        // 其他情况直接跳转 WhatsApp
         window.location.href = "https://wa.me/15551234567";
       }
     };
@@ -29,8 +30,11 @@
 </head>
 <body style="font-family: sans-serif; text-align: center; padding: 50px;">
   <div id="safari-redirect" style="display: none;">
-    <p>Please open this link in Safari to continue chatting on WhatsApp.</p>
-    <button onclick="window.open('go.html', '_blank')" style="padding: 10px 20px; font-size: 16px;">Open in Safari</button>
+    <p style="font-size: 16px;">⚠️ To chat on WhatsApp, please open this page in Safari:</p>
+    <p style="font-size: 14px;">Tap <b>[...]</b> in the top right corner and choose <b>"Open in browser"</b>.</p>
+    <button onclick="window.open('go.html', '_blank')" style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">
+      Open in Safari
+    </button>
   </div>
 </body>
 </html>
