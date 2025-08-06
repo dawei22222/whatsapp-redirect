@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Redirecting to WhatsApp...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body { text-align: center; font-family: sans-serif; padding: 40px; }
-    .tip { margin-top: 30px; font-size: 18px; color: #555; }
+    .tip { margin-top: 20px; font-size: 16px; color: #555; }
     .button {
-      margin-top: 20px;
+      margin-top: 25px;
       padding: 12px 24px;
       background-color: #25D366;
       color: white;
@@ -18,38 +18,38 @@
       font-size: 16px;
     }
     .arrow {
-      margin-top: 20px;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h2>Please wait, redirecting to WhatsApp...</h2>
-  <p class="tip">If you are not redirected automatically, please click the button below:</p>
-  <a class="button" href="https://wa.me/85212345678">Open WhatsApp</a>
-  <p class="tip">If it still doesn't work, tap the "<b>...</b>" menu in the top right corner and choose <b>"Open in browser"</b>.</p>
-  <div class="arrow">
-    <img src="https://i.imgur.com/OjPxl4Z.png" width="80" alt="arrow">
+  <h2>Redirecting to WhatsApp...</h2>
+  <div id="ios-tip" style="display:none;">
+    <p class="tip">iPhone detected in app browser (e.g. TikTok).</p>
+    <p class="tip">Please tap "<b>···</b>" in the top-right and choose <b>"Open in browser"</b>.</p>
+    <div class="arrow">
+      <img src="https://i.imgur.com/OjPxl4Z.png" width="80" alt="arrow" />
+    </div>
+    <a class="button" href="https://wa.me/85298507421">Open WhatsApp</a>
   </div>
 
   <script>
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const isAndroid = /android/.test(ua);
+    const isInAppBrowser = /tiktok|fbav|instagram|messenger/.test(ua);
+    const waLink = "https://wa.me/85298507421";
 
-    const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
-    const isAndroid = /Android/i.test(userAgent);
-    const isTikTok = /TikTok/i.test(userAgent);
-    const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
-    const isChrome = /Chrome/i.test(userAgent);
-
-    const waUrl = "https://wa.me/85212345678";
-
-    if (isAndroid && !isTikTok) {
-      // 安卓且不是 TikTok → 直接跳转
-      setTimeout(() => window.location.href = waUrl, 1500);
-    } else if (isIOS && !isTikTok) {
-      // iOS Safari 或 Chrome → 自动跳转
-      setTimeout(() => window.location.href = waUrl, 1500);
+    if (isAndroid) {
+      // 安卓设备：全部自动跳转
+      window.location.href = waLink;
+    } else if (isIOS && !isInAppBrowser) {
+      // 苹果 + Safari 或其他浏览器 → 自动跳转
+      window.location.href = waLink;
+    } else {
+      // 苹果 + TikTok/FB 内置浏览器：不跳转，显示引导
+      document.getElementById("ios-tip").style.display = "block";
     }
-    // 否则（如 TikTok 内）不自动跳转，显示引导
   </script>
 </body>
 </html>
