@@ -1,44 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>正在跳转到 WhatsApp...</title>
   <style>
-    body { text-align: center; font-family: sans-serif; padding: 40px; }
-    .tip { margin-top: 30px; font-size: 18px; color: #555; }
-    .button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-      font-size: 16px;
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 50px 20px;
     }
     .arrow {
-      margin-top: 20px;
       width: 100px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h2>Please wait, redirecting to WhatsApp...</h2>
-  <p class="tip">If you are not redirected automatically, please click the button below:</p>
-  <a class="button" href="https://wa.me/85212345678">Open WhatsApp</a>
-  <p class="tip">If you're using iPhone, please click the "..." menu in the top right corner and choose "Open in browser".</p>
-  <img src="arrow-tip.png" alt="Click here" class="arrow">
+  <div id="notice" style="display: none;">
+    <h3>请点击右上角</h3>
+    <p>在浏览器（如 Safari）中打开本页面，以继续跳转 WhatsApp</p>
+    <img class="arrow" src="https://magicclick.icu/arrow-tip.png" alt="打开提示箭头" />
+  </div>
 
   <script>
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const isTikTok = navigator.userAgent.toLowerCase().includes("tiktok");
 
-    if (!isIOS) {
-      // Android 自动跳转
-      window.location.href = "https://wa.me/85212345678";
+    if (isTikTok) {
+      document.getElementById("notice").style.display = "block";
+    } else {
+      // 非 TikTok 浏览器，自动跳转
+      window.location.href = "https://api.whatsapp.com/send?phone=85298507421";
     }
-    // iOS 用户保留手动点击按钮和提示
   </script>
 </body>
 </html>
