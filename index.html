@@ -22,33 +22,34 @@
       color: white;
       border: none;
       border-radius: 8px;
-      display: none;
+    }
+    .tip {
+      margin-top: 40px;
+      font-size: 14px;
+      color: gray;
     }
   </style>
 </head>
 <body>
   <h2>⚠️ Please open this page in Safari browser</h2>
   <p>To continue chatting on WhatsApp</p>
-  <img src="arrow-tip.png" alt="Click top-right and open in browser" />
-  <p style="margin-top:40px; font-size: 14px; color: gray;">
+  <img src="arrow-tip.png" alt="Click top-right and open in browser">
+
+  <p class="tip">
     If it doesn’t open automatically, tap the button below:
   </p>
-  <button class="btn" id="goBtn">👉 Continue to WhatsApp</button>
+
+  <button class="btn" onclick="window.location.href='https://wa.me/85298507421'">
+    👉 Continue to WhatsApp
+  </button>
 
   <script>
     const isInTikTok = navigator.userAgent.toLowerCase().includes('tiktok');
-    const whatsappURL = 'https://wa.me/85298507421';
-
     if (!isInTikTok) {
-      // 外部浏览器自动跳转
-      window.location.href = whatsappURL;
-    } else {
-      // TikTok 内显示按钮，手动跳转
-      document.getElementById('goBtn').style.display = 'inline-block';
-      document.getElementById('goBtn').addEventListener('click', () => {
-        window.location.href = whatsappURL;
-      });
+      // 正常浏览器中自动跳转
+      window.location.href = 'https://wa.me/85298507421';
     }
+    // 否则留在页面中，展示提示图和按钮
   </script>
 </body>
 </html>
