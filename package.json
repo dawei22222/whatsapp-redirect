@@ -1,10 +1,11 @@
 {
   "name": "whatsapp-redirect",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "dev": "next dev"
+    "start": "next start"
   },
   "dependencies": {
     "next": "13.4.19",
