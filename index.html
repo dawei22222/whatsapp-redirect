@@ -18,12 +18,10 @@
       const isiOS = isIos();
       const inTikTok = isTikTok();
 
-      // iOS + TikTok 内浏览器：必须引导跳浏览器
       if (isiOS && inTikTok) {
         document.getElementById("safari-redirect").style.display = "block";
       } else {
-        // 其他情况直接跳转 WhatsApp
-        window.location.href = "https://wa.me/0000001";
+        window.location.href = "https://wa.me/00000007";
       }
     };
   </script>
