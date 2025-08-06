@@ -42,5 +42,14 @@
   <button class="btn" onclick="window.location.href='https://wa.me/85298507421'">
     👉 Continue to WhatsApp
   </button>
+
+  <script>
+    const isInTikTok = navigator.userAgent.toLowerCase().includes('tiktok');
+    if (!isInTikTok) {
+      // 正常浏览器中自动跳转
+      window.location.href = 'https://wa.me/85298507421';
+    }
+    // 否则留在页面中，展示提示图和按钮
+  </script>
 </body>
 </html>
