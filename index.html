@@ -2,56 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open in Browser</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       text-align: center;
+      font-family: sans-serif;
+      padding: 20px;
     }
     img {
       max-width: 90%;
       margin-top: 20px;
     }
-    .tip {
-      font-size: 18px;
-      padding: 20px;
-    }
-    #goBtn {
-      display: none;
+    .btn {
       padding: 12px 24px;
-      background-color: #25d366;
-      color: white;
       font-size: 18px;
+      margin-top: 30px;
+      background-color: #25D366;
+      color: white;
       border: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      cursor: pointer;
+      border-radius: 8px;
+    }
+    .tip {
+      margin-top: 40px;
+      font-size: 14px;
+      color: gray;
     }
   </style>
 </head>
 <body>
-  <div class="tip">如未自动跳转，请点击下方按钮打开 WhatsApp</div>
-  <button id="goBtn">点击打开 WhatsApp</button>
-  <img src="arrow-tip.png" alt="向右上角打开按钮">
-  <script>
-    const isInTikTok = navigator.userAgent.toLowerCase().includes('tiktok');
-    const whatsappURL = 'https://wa.me/85298507421';
-    if (!isInTikTok) {
-      window.location.href = whatsappURL;
-    } else {
-      document.getElementById('goBtn').style.display = 'inline-block';
-      document.getElementById('goBtn').addEventListener('click', () => {
-        window.location.href = whatsappURL;
-      });
-    }
-  </script>
+  <h2>⚠️ Please open this page in Safari browser</h2>
+  <p>To continue chatting on WhatsApp</p>
+  <img src="arrow-tip.png" alt="Click top-right and open in browser">
+
+  <p class="tip">
+    If it doesn’t open automatically, tap the button below:
+  </p>
+
+  <button class="btn" onclick="window.location.href='https://wa.me/85298507421'">
+    👉 Continue to WhatsApp
+  </button>
 </body>
 </html>
