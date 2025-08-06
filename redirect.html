@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Redirecting to WhatsApp...</title>
+  <title>Redirecting...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body { text-align: center; font-family: sans-serif; padding: 40px; }
@@ -23,32 +23,34 @@
   </style>
 </head>
 <body>
-  <h2>Redirecting to WhatsApp...</h2>
+  <h2 id="main-title">Redirecting to WhatsApp...</h2>
   <div id="ios-tip" style="display:none;">
-    <p class="tip">iPhone detected in app browser (e.g. TikTok).</p>
-    <p class="tip">Please tap "<b>···</b>" in the top-right and choose <b>"Open in browser"</b>.</p>
+    <p class="tip">If you're using TikTok or another app browser on iPhone,</p>
+    <p class="tip">please tap "<b>···</b>" and choose <b>"Open in browser"</b>.</p>
     <div class="arrow">
       <img src="https://i.imgur.com/OjPxl4Z.png" width="80" alt="arrow" />
     </div>
-    <a class="button" href="https://wa.me/85298507421">Open WhatsApp</a>
   </div>
+  <a id="wa-btn" class="button" href="https://wa.me/85298507421" style="display: none;">Open WhatsApp</a>
 
   <script>
     const ua = navigator.userAgent.toLowerCase();
     const isIOS = /iphone|ipad|ipod/.test(ua);
     const isAndroid = /android/.test(ua);
-    const isInAppBrowser = /tiktok|fbav|instagram|messenger/.test(ua);
-    const waLink = "https://wa.me/85298507421";
+    const isInApp = /tiktok|fbav|instagram|messenger/.test(ua);
+    const btn = document.getElementById("wa-btn");
+    const tip = document.getElementById("ios-tip");
 
     if (isAndroid) {
-      // 安卓设备：全部自动跳转
-      window.location.href = waLink;
-    } else if (isIOS && !isInAppBrowser) {
-      // 苹果 + Safari 或其他浏览器 → 自动跳转
-      window.location.href = waLink;
-    } else {
-      // 苹果 + TikTok/FB 内置浏览器：不跳转，显示引导
-      document.getElementById("ios-tip").style.display = "block";
+      // 安卓自动跳转
+      window.location.href = "https://wa.me/85298507421";
+    } else if (isIOS) {
+      // iOS 所有情况都不自动跳转，手动点击按钮
+      btn.style.display = "inline-block";
+      if (isInApp) {
+        tip.style.display = "block";
+      }
+      document.getElementById("main-title").textContent = "Tap the button below to open WhatsApp";
     }
   </script>
 </body>
