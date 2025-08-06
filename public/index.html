@@ -2,83 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat on WhatsApp</title>
   <style>
     body {
-      background-color: #fffaf4;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fffaf5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
       padding: 40px 20px;
-      margin: 0;
     }
+
     .arrow {
       width: 100px;
       height: 100px;
-      border-top: 5px solid red;
-      border-right: 5px solid red;
-      transform: rotate(45deg);
-      position: absolute;
-      top: 20px;
-      right: 20px;
+      margin-top: 10px;
     }
-    h2 {
-      font-size: 22px;
-      margin-top: 140px;
-    }
-    p {
+
+    h1 {
       font-size: 18px;
-      margin: 10px 0;
-    }
-    .wa-number {
-      font-weight: bold;
-      font-size: 22px;
-      user-select: text;
-    }
-    .btn {
       margin-top: 40px;
-      padding: 15px 25px;
-      font-size: 18px;
-      color: white;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 12px 0;
+    }
+
+    .whatsapp-number {
+      font-weight: bold;
+      font-size: 20px;
+      color: #000;
+      margin-bottom: 25px;
+    }
+
+    .btn {
       background-color: #25D366;
+      color: white;
+      font-size: 16px;
+      padding: 12px 24px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      text-decoration: none;
     }
-    @media screen and (max-width: 400px) {
-      h2 {
-        font-size: 18px;
-      }
-      p, .wa-number {
-        font-size: 16px;
-      }
-      .btn {
-        font-size: 16px;
+
+    @media (max-width: 480px) {
+      .arrow {
+        width: 80px;
+        height: 80px;
       }
     }
   </style>
-  <script>
-    // 检测是否是 iOS
-    function isIOS() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-
-    // 如果不是 iOS，自动跳转 WhatsApp
-    window.onload = function () {
-      if (!isIOS()) {
-        window.location.href = 'https://wa.me/1234567890'; // 改成你的 WhatsApp 链接
-      }
-    };
-  </script>
 </head>
 <body>
-  <div class="arrow"></div>
-  <h2>Please click the top right "..."</h2>
+  <svg class="arrow" viewBox="0 0 100 100">
+    <path d="M10,90 Q90,10 90,10" stroke="red" stroke-width="5" fill="none" marker-end="url(#arrowhead)" />
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="red" />
+      </marker>
+    </defs>
+  </svg>
+
+  <h1>Please click the top right "..."</h1>
   <p>Then select <strong>"Open in browser"</strong></p>
   <p>or copy my WhatsApp number:</p>
-  <div class="wa-number">+1234567890</div> <!-- 你自己的号码 -->
-  <a href="https://wa.me/1234567890" target="_blank">
-    <button class="btn">Add me on WhatsApp</button>
-  </a>
+  <div class="whatsapp-number">+1234567890</div>
+
+  <a class="btn" id="waBtn" href="https://wa.me/1234567890">Add me on WhatsApp</a>
+
+  <script>
+    const isAndroid = /android/i.test(navigator.userAgent);
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isTikTok = /tiktok/i.test(navigator.userAgent);
+
+    if (isAndroid && !isTikTok) {
+      // 安卓正常跳转
+      window.location.href = 'https://wa.me/1234567890';
+    }
+
+    // iOS + TikTok 不跳转，显示页面
+  </script>
 </body>
 </html>
