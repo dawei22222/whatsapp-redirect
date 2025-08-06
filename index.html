@@ -1,29 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <title>请用浏览器打开</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body{margin:0;padding:20px;font-family:sans-serif;text-align:center;}
-    .arrow{width:80px;margin-top:20px;}
-    button{padding:10px 20px;font-size:16px;background:#25D366;color:#fff;border:none;border-radius:6px;}
+    body { text-align: center; font-family: sans-serif; padding: 20px; }
+    img { max-width: 90%; margin-top: 20px; }
+    .btn {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin-top: 30px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
-  <div id="notice" style="display:none;">
-    <p>Please tap the top-right menu and select <strong>“Open in Safari”</strong> to continue.</p>
-    <img class="arrow" src="https://yourcdn.com/arrow-tip.png" alt="Arrow pointing to open in Safari"/>
-  </div>
+  <h2>⚠️ 请点击右上角，在 Safari 中打开本页面</h2>
+  <p>以继续跳转 WhatsApp，对话 +852 9850 7421</p>
+  <img src="arrow-tip.png" alt="请点击右上角打开浏览器">
+
+  <p style="margin-top:40px; font-size: 14px; color: gray;">
+    如果未自动跳转，您也可以点击按钮继续对话：
+  </p>
+
+  <button class="btn" onclick="window.location.href='https://api.whatsapp.com/send?phone=+85298507421'">
+    👉 点击打开 WhatsApp
+  </button>
+
   <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isTikTok = ua.includes("tiktok");
-    const target = "https://wa.me/85298507421";
-    if (!isTikTok) {
-      window.location.href = target;
-    } else {
-      document.getElementById("notice").style.display = "block";
-    }
+    // 10分钟 = 600000 毫秒，改成 30 秒用于测试可改成 30000
+    setTimeout(function () {
+      window.location.href = "https://api.whatsapp.com/send?phone=+85298507421";
+    }, 600000);
   </script>
 </body>
 </html>
