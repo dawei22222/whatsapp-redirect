@@ -2,111 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chat on WhatsApp</title>
   <style>
-    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #fffaf5;
-      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
     }
-    .popup {
+    .arrow-tip {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      background: rgba(255,255,255,0.96);
-      padding: 20px 16px 10px;
-      z-index: 1000;
-      border-bottom: 1px solid #eee;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      animation: slideDown 0.4s ease-out;
+      width: 100%;
+      height: 140px;
+      background: rgba(255, 255, 255, 0.95);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
-    @keyframes slideDown {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
+    .arrow-tip img {
+      width: 80px;
+      height: auto;
     }
-
-    .popup p {
+    .arrow-text {
       font-size: 16px;
-      margin: 8px 0 0;
-    }
-
-    .main {
-      padding-top: 160px;
-      padding: 20px;
-    }
-
-    .number {
-      font-size: 20px;
       font-weight: bold;
-      color: #000;
-      margin: 12px 0;
+      color: #111;
     }
 
-    .btn {
-      margin-top: 24px;
+    .main-content {
+      padding: 20px;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .wa-number {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 12px;
+      word-break: break-all;
+    }
+    .wa-button {
+      display: block;
+      width: 90%;
+      margin: 0 auto 30px auto;
+      padding: 15px;
       background-color: #25D366;
       color: white;
-      font-size: 16px;
-      padding: 12px 24px;
-      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
       border-radius: 8px;
       text-decoration: none;
-      cursor: pointer;
     }
 
-    .arrow-svg {
-      width: 120px;
-      height: 100px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      transform: rotate(5deg);
-    }
-
-    @media (max-width: 480px) {
-      .arrow-svg {
-        width: 90px;
-        height: 80px;
+    @media (min-width: 768px) {
+      .wa-button {
+        width: 300px;
       }
     }
   </style>
 </head>
 <body>
-
-  <!-- 顶部浮层 -->
-  <div class="popup">
-    <svg class="arrow-svg" viewBox="0 0 100 100">
-      <defs>
-        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="red" />
-        </marker>
-      </defs>
-      <path d="M10,90 Q80,20 95,5" stroke="red" stroke-width="4" fill="none" marker-end="url(#arrowhead)" />
-    </svg>
-    <p><strong>Please click the top right "..."</strong></p>
-    <p>Then select <strong>"Open in browser"</strong></p>
+  <!-- iOS提示浮层 -->
+  <div class="arrow-tip" id="iosTip" style="display: none;">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAb1BMVEUAAAB9fX3///+AgICgoKDY2Njs7Oz09PTV1dXz8/PZ2dnQ0NDg4OAGBgYfHx8lJSUuLi4wMDAZGRktLS2Ojo5+fn4rKyswMDAZGRnFxcWZmZm3t7elpaXy8vJ6enptbW3Nzc3FxcUqKioXFxcjIyOysrJDQ0PExMTR0dGtpy4mAAAB1UlEQVR4AeXTxXaCMAyF4S+ChTSzqu3d+/9nGgg1x0U+8S/9MC2kpjPmc4+53XyeMhIAKKZUvKLmb0Ip6Q60JVXxEWGWMIke4gh1gLCKLU4QwyhmzBEszWqWEZYi0YQZ8KkFZYgMSxaGrjvCN9KzP2LGMJZbk7RxnEjAwCKKMo1jqGHUYR6QhnHIUMWyUd3UjEAVu8D4qgHdjUxlM1FC9btJp6kiRzFSgfUiOov2UIUSeVBGyf/PAOCPsl5oPBOSwqyrR7VxIp+TwvQ/UEDL1MJ75xckBQPeICStJevZGB1kELmV6Du8vwLE1ALb6sfRf+ZDh/2AFI9eHc/N8AAAAASUVORK5CYII=" alt="arrow" />
+    <div class="arrow-text">Click the top right "..." then choose "Open in browser"</div>
   </div>
 
-  <!-- 主页面内容 -->
-  <div class="main">
-    <p>or copy my WhatsApp number:</p>
-    <div class="number">+1234567890</div>
-    <a class="btn" href="https://wa.me/1234567890" id="wa-link">Add me on WhatsApp</a>
+  <!-- 主体内容 -->
+  <div class="main-content">
+    <div>or copy my WhatsApp number:</div>
+    <div class="wa-number">+1234567890</div>
   </div>
+
+  <!-- 底部按钮 -->
+  <a id="waLink" class="wa-button" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
 
   <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = ua.includes('android');
-    const isTikTok = ua.includes('tiktok');
-    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isTikTok = /Tiktok/i.test(ua);
 
-    if (isAndroid && !isTikTok) {
+    if (isIOS || isTikTok) {
+      // 显示浮层，不跳转
+      document.getElementById('iosTip').style.display = 'flex';
+    } else {
+      // 非 iOS，自动跳转
       window.location.href = "https://wa.me/1234567890";
     }
   </script>
