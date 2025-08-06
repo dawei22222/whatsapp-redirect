@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { text-align: center; font-family: sans-serif; padding: 40px; }
+    .tip { margin-top: 30px; font-size: 18px; color: #555; }
+    .button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .arrow {
+      margin-top: 20px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Please wait, redirecting to WhatsApp...</h2>
+  <p class="tip">If you are not redirected automatically, please click the button below:</p>
+  <a class="button" href="https://wa.me/85212345678">Open WhatsApp</a>
+  <p class="tip">If you're using iPhone, please click the "..." menu in the top right corner and choose "Open in browser".</p>
+  <img src="arrow-tip.png" alt="Click here" class="arrow">
+
+  <script>
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (!isIOS) {
+      // Android 自动跳转
+      window.location.href = "https://wa.me/85212345678";
+    }
+    // iOS 用户保留手动点击按钮和提示
+  </script>
+</body>
+</html>
