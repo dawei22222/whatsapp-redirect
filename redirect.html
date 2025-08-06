@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirect to WhatsApp</title>
+  <title>Redirecting...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { text-align: center; font-family: sans-serif; padding: 40px; }
-    .tip { margin-top: 20px; font-size: 17px; color: #555; }
+    .tip { margin-top: 30px; font-size: 18px; color: #555; }
     .button {
       margin-top: 20px;
       padding: 12px 24px;
@@ -18,42 +18,38 @@
       font-size: 16px;
     }
     .arrow {
-      margin-top: 40px;
-    }
-    .arrow img {
-      width: 60px;
-      transform: rotate(90deg);
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h2>Please wait, redirecting to WhatsApp...</h2>
-
-  <div id="ios-tip" style="display: none;">
-    <p class="tip">If you are not redirected, click the button below:</p>
-    <a class="button" href="https://wa.me/85212345678">Open WhatsApp</a>
-
-    <div class="arrow">
-      <img src="https://i.imgur.com/kUwfyLI.png" alt="arrow">
-    </div>
-
-    <p class="tip">Tap the "..." in the top right</p>
-    <p class="tip">Then choose “Open in browser”</p>
+  <p class="tip">If you are not redirected automatically, please click the button below:</p>
+  <a class="button" href="https://wa.me/85212345678">Open WhatsApp</a>
+  <p class="tip">If it still doesn't work, tap the "<b>...</b>" menu in the top right corner and choose <b>"Open in browser"</b>.</p>
+  <div class="arrow">
+    <img src="https://i.imgur.com/OjPxl4Z.png" width="80" alt="arrow">
   </div>
 
   <script>
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(userAgent);
-    const isAndroid = /android/.test(userAgent);
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (isIOS) {
-      document.getElementById('ios-tip').style.display = 'block';
-    } else if (isAndroid) {
-      window.location.href = "https://wa.me/85298507421";
-    } else {
-      // Fallback: show iOS-style tip
-      document.getElementById('ios-tip').style.display = 'block';
+    const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+    const isAndroid = /Android/i.test(userAgent);
+    const isTikTok = /TikTok/i.test(userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+    const isChrome = /Chrome/i.test(userAgent);
+
+    const waUrl = "https://wa.me/85212345678";
+
+    if (isAndroid && !isTikTok) {
+      // 安卓且不是 TikTok → 直接跳转
+      setTimeout(() => window.location.href = waUrl, 1500);
+    } else if (isIOS && !isTikTok) {
+      // iOS Safari 或 Chrome → 自动跳转
+      setTimeout(() => window.location.href = waUrl, 1500);
     }
+    // 否则（如 TikTok 内）不自动跳转，显示引导
   </script>
 </body>
 </html>
