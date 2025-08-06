@@ -1,34 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Open in Browser</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to WhatsApp...</title>
   <style>
-    body { text-align: center; font-family: sans-serif; padding: 20px; }
-    img { max-width: 90%; margin-top: 20px; }
-    .btn {
-      padding: 12px 24px;
-      font-size: 18px;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .tip {
+      font-size: 16px;
+      color: #555;
+      margin-top: 20px;
+    }
+    .button {
+      display: inline-block;
       margin-top: 30px;
+      padding: 12px 24px;
       background-color: #25D366;
       color: white;
-      border: none;
-      border-radius: 8px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+    .arrow {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 220px;
     }
   </style>
 </head>
 <body>
-  <h2>⚠️ Please open this page in Safari browser</h2>
-  <p>To continue chatting on WhatsApp</p>
-  <img src="arrow-tip.png" alt="Click top-right and open in browser">
+  <div class="container">
+    <h2>Please wait...</h2>
+    <div id="tiktokWarning" style="display:none;">
+      <p class="tip">Tap the top-right <strong>[···]</strong> and choose <strong>“Open in browser”</strong></p>
+      <img class="arrow" src="arrow-tip.png" alt="Open in browser tip">
+    </div>
+    <div id="browserAction" style="display:none;">
+      <p class="tip">Click the button below to open WhatsApp</p>
+      <a class="button" href="https://wa.me/85298507421">Open WhatsApp</a>
+    </div>
+  </div>
 
-  <p style="margin-top:40px; font-size: 14px; color: gray;">
-    If it doesn’t open automatically, tap the button below:
-  </p>
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad/.test(ua);
+    const isTikTok = /tiktok/.test(ua);
 
-  <button class="btn" onclick="window.location.href='https://wa.me/85298507421'">
-    👉 Continue to WhatsApp
-  </button>
+    if (isIOS && isTikTok) {
+      document.getElementById("tiktokWarning").style.display = "block";
+    } else if (!isTikTok) {
+      document.getElementById("browserAction").style.display = "block";
+    } else {
+      window.location.href = "https://wa.me/85298507421";
+    }
+  </script>
 </body>
 </html>
