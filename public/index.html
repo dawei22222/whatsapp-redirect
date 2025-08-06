@@ -1,43 +1,57 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Redirect Tip</title>
-    <style>
-      body {
-        background-color: #fff7ed;
-        text-align: center;
-        font-family: sans-serif;
-        padding-top: 100px;
-      }
-      .arrow {
-        width: 64px;
-      }
-      .tip {
-        margin-top: 20px;
-        font-size: 16px;
-        color: #333;
-      }
-      .btn {
-        margin-top: 40px;
-        font-size: 18px;
-        padding: 10px 20px;
-        background-color: #25d366;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <img class="arrow" src="/arrow-tip.png" alt="arrow">
-    <div class="tip">
-      Please tap the "..." in the top right corner<br>
-      and choose <b>“Open in browser”</b><br><br>
-      请点击右上角“···”并选择<br>“在浏览器中打开”
-    </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirecting to WhatsApp...</title>
+  <style>
+    body {
+      background-color: #fdf1e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+    }
+    img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+    .tip {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
 
-    <button class="btn" onclick="location.href='/go.html'">我已在浏览器中打开</button>
-  </body>
+  <img src="arrow-tip.png" alt="Open in browser arrow" />
+  <div class="tip">
+    Please tap the <span class="highlight">"..."</span> in the top right corner<br/>
+    and choose <span class="highlight">"Open in browser"</span><br/><br/>
+    请点击右上角 <span class="highlight">“…”，选择“在浏览器中打开”</span>
+  </div>
+
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const isTikTok = ua.includes("tiktok");
+
+    const whatsappLink = "https://wa.me/1234567890"; // ← 替换成你的 WhatsApp 链接
+
+    if (!isTikTok || !isIOS) {
+      // 非 TikTok 或 安卓用户，直接跳转
+      window.location.href = whatsappLink;
+    }
+    // iOS + TikTok 不跳转，停留显示提示图
+  </script>
+
+</body>
 </html>
