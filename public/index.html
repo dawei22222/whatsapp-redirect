@@ -5,49 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat on WhatsApp</title>
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: #fffaf5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       text-align: center;
-      min-height: 100vh;
-      padding: 40px 20px;
-      box-sizing: border-box;
+    }
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.96);
+      padding: 20px 16px 10px;
+      z-index: 1000;
+      border-bottom: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      animation: slideDown 0.4s ease-out;
     }
 
-    .arrow-svg {
-      width: 160px;
-      height: 160px;
-      margin-top: -20px;
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
-    h1 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-top: -10px;
-    }
-
-    p {
+    .popup p {
       font-size: 16px;
-      margin: 8px 0;
-      line-height: 1.5;
+      margin: 8px 0 0;
+    }
+
+    .main {
+      padding-top: 160px;
+      padding: 20px;
     }
 
     .number {
       font-size: 20px;
       font-weight: bold;
       color: #000;
-      margin: 16px 0;
-      word-break: break-word;
+      margin: 12px 0;
     }
 
     .btn {
-      margin-top: 30px;
+      margin-top: 24px;
       background-color: #25D366;
       color: white;
       font-size: 16px;
@@ -58,32 +60,45 @@
       cursor: pointer;
     }
 
+    .arrow-svg {
+      width: 120px;
+      height: 100px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      transform: rotate(5deg);
+    }
+
     @media (max-width: 480px) {
       .arrow-svg {
-        width: 120px;
-        height: 120px;
+        width: 90px;
+        height: 80px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- SVG箭头，精确指向右上角 “...” -->
-  <svg class="arrow-svg" viewBox="0 0 100 100">
-    <defs>
-      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-        <polygon points="0 0, 10 3.5, 0 7" fill="red" />
-      </marker>
-    </defs>
-    <path d="M10,90 Q80,20 95,5" stroke="red" stroke-width="4" fill="none" marker-end="url(#arrowhead)" />
-  </svg>
+  <!-- 顶部浮层 -->
+  <div class="popup">
+    <svg class="arrow-svg" viewBox="0 0 100 100">
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="red" />
+        </marker>
+      </defs>
+      <path d="M10,90 Q80,20 95,5" stroke="red" stroke-width="4" fill="none" marker-end="url(#arrowhead)" />
+    </svg>
+    <p><strong>Please click the top right "..."</strong></p>
+    <p>Then select <strong>"Open in browser"</strong></p>
+  </div>
 
-  <h1>Please click the top right "..."</h1>
-  <p>Then select <strong>"Open in browser"</strong></p>
-  <p>or copy my WhatsApp number below:</p>
-  <div class="number">+8888888888888</div>
-
-  <a class="btn" href="https://wa.me/1234567890" id="wa-link">Add me on WhatsApp</a>
+  <!-- 主页面内容 -->
+  <div class="main">
+    <p>or copy my WhatsApp number:</p>
+    <div class="number">+1234567890</div>
+    <a class="btn" href="https://wa.me/1234567890" id="wa-link">Add me on WhatsApp</a>
+  </div>
 
   <script>
     const ua = navigator.userAgent.toLowerCase();
@@ -92,10 +107,8 @@
     const isIOS = /iphone|ipad|ipod/.test(ua);
 
     if (isAndroid && !isTikTok) {
-      // 安卓且不是在TikTok中打开，自动跳转
       window.location.href = "https://wa.me/1234567890";
     }
-    // iOS TikTok 等保持当前页面，显示指引
   </script>
 </body>
 </html>
