@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Let’s chat on WhatsApp</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click to Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #fff8f0;
+      text-align: center;
+    }
+    .button {
+      margin-top: 20px;
+      padding: 14px 26px;
+      font-size: 20px;
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
   <script>
     function isIos() {
       return /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -18,23 +42,21 @@
       const isiOS = isIos();
       const inTikTok = isTikTok();
 
-      if (isiOS && inTikTok) {
-        // 不跳转，显示按钮引导用户点击
-        document.getElementById("ios-box").style.display = "block";
+      if (!isiOS || !inTikTok) {
+        // 安卓 或 非 TikTok iOS → 直接跳 WhatsApp
+        window.location.href = "https://wa.me/15551234567";
       } else {
-        // 安卓或非 TikTok，直接跳
-        window.location.href = "https://wa.me/100000007";
+        // iOS + TikTok → 显示跳转按钮
+        document.getElementById("ios-tip").style.display = "block";
       }
     };
   </script>
 </head>
-<body style="text-align:center; font-family: sans-serif; padding-top: 50px;">
-  <div id="ios-box" style="display: none;">
-    <p style="font-size: 18px;">🔒 iOS security requires browser access to WhatsApp</p>
-    <p style="font-size: 14px;">Tap the button below to open in Safari</p>
-    <a href="go.html" target="_blank" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #25D366; color: white; text-decoration: none; border-radius: 8px; font-size: 16px;">
-      Open in Safari to Chat
-    </a>
+<body>
+  <div id="ios-tip" style="display: none;">
+    <h2>👋 Tap the button below</h2>
+    <p>Please click the button to continue chatting with me</p>
+    <a class="button" href="/go.html" target="_blank">点击和我聊天的按钮</a>
   </div>
 </body>
 </html>
