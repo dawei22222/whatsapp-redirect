@@ -1,75 +1,57 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>添加 WhatsApp</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat on WhatsApp</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background: url('https://yourdomain.com/background-arrow.jpg') no-repeat center top;
+      background: url('/arrow-bg.png') no-repeat center top;
       background-size: cover;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      color: #222;
+      justify-content: flex-end;
+      height: 100vh;
+      background-color: #fff;
     }
 
-    .container {
+    .content {
+      background-color: #fff;
       width: 100%;
-      padding: 20px;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
       text-align: center;
-      margin-top: 220px; /* 避免遮挡箭头 */
     }
 
-    .container h2 {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-
-    .whatsapp-number {
-      font-size: 22px;
+    .phone {
+      font-size: 24px;
       font-weight: bold;
-      margin-bottom: 30px;
+      margin: 10px 0;
+      color: #333;
     }
 
-    .button {
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
       background-color: #25D366;
       color: white;
       font-size: 18px;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 40px;
-    }
-
-    .button:active {
-      transform: scale(0.97);
-    }
-
-    @media (max-width: 480px) {
-      .container h2 {
-        font-size: 18px;
-      }
-      .whatsapp-number {
-        font-size: 20px;
-      }
+      border-radius: 6px;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>请点击右上角 <strong>“...”</strong><br>选择 <strong>“在浏览器中打开”</strong></h2>
-    <div class="whatsapp-number">+22222222220</div>
+  <div class="content">
+    <div>或复制添加我 WhatsApp 账号：</div>
+    <div class="phone">+221212121290</div>
+    <a class="btn" href="https://wa.me/1234567890" target="_blank">点此添加 WhatsApp</a>
   </div>
-
-  <button class="button" onclick="window.location.href='https://wa.me/1234567890'">
-    点此添加 WhatsApp
-  </button>
 </body>
 </html>
