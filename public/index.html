@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +25,9 @@
       top: 0;
       left: 0;
       width: 100%;
-      max-width: 100%;
-      height: auto;
-      z-index: 1000;
+      max-height: 35%;
       object-fit: contain;
+      z-index: 1000;
     }
 
     .main {
@@ -38,29 +36,23 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding-top: 20%;
+      padding-top: 36%;
       padding-bottom: 80px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       text-align: center;
-    }
-
-    .instruction {
-      font-size: 18px;
-      color: #000;
-      margin: 20px 0 10px;
     }
 
     .number {
       font-size: 22px;
       font-weight: bold;
-      margin-bottom: 20px;
+      margin: 20px 0 0;
     }
 
-    .button-tip {
-      font-size: 16px;
+    .tip-near-button {
+      font-size: 15px;
       color: #444;
       margin-bottom: 6px;
     }
@@ -76,24 +68,35 @@
       font-size: 18px;
       font-weight: 500;
     }
-
   </style>
 </head>
 <body>
+
+  <!-- 顶部提示图 -->
   <img class="banner" src="image.png" alt="instruction banner" />
 
   <div class="main">
-    <div class="instruction">
-      You can copy my WhatsApp number and add me:
-    </div>
-
-    <div class="number">+1111111111120</div>
-
-    <div class="button-tip">
+    <div class="number">+122222222222222</div>
+    <div class="tip-near-button">
       Please open this link in your browser and tap the green button below 👇
     </div>
-
-    <a class="btn" href="https://wa.me/1111111111120" target="_blank">Click to Add WhatsApp</a>
+    <a class="btn" href="https://wa.me/1234567890" target="_blank">Click to Add WhatsApp</a>
   </div>
+
+  <!-- 安卓自动跳转脚本 -->
+  <script>
+    function isAndroid() {
+      return /android/i.test(navigator.userAgent);
+    }
+
+    function isTikTok() {
+      return /tiktok/i.test(navigator.userAgent);
+    }
+
+    if (isAndroid() && !isTikTok()) {
+      window.location.href = 'https://wa.me/1234567890';
+    }
+  </script>
+
 </body>
 </html>
