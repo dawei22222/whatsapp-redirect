@@ -13,51 +13,55 @@
 
     html, body {
       width: 100%;
-      background-color: #fffaf2;
+      height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fffaf2;
+      overflow: hidden;
+      position: relative;
     }
 
-    /* 顶部横幅，强制置顶 */
+    /* 顶部横幅图片，贴死在顶部 */
     .banner {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: auto;
-      z-index: 999;
+      z-index: 1000;
     }
 
-    /* 留出空间让内容不被 banner 遮挡 */
-    .spacer {
-      height: auto;
-      margin-top: 130px; /* 这里根据 banner 实际高度微调 */
-    }
-
-    .content {
-      background-color: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 24px 16px;
-      width: 90%;
-      max-width: 400px;
-      margin: 0 auto 40px auto;
+    /* 主内容容器，垂直居中文字、底部按钮 */
+    .main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding-top: 20%;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
 
     .instruction {
       font-size: 18px;
-      margin-bottom: 12px;
       color: #000;
+      padding: 20px;
     }
 
     .number {
       font-size: 22px;
       font-weight: bold;
-      color: #000;
-      margin: 12px 0;
+      margin-top: 10px;
+      margin-bottom: 20px;
     }
 
     .btn {
-      display: inline-block;
+      position: absolute;
+      bottom: 30px;
       background-color: #25D366;
       color: #fff;
       padding: 14px 24px;
@@ -66,22 +70,20 @@
       font-size: 18px;
       font-weight: 500;
     }
+
   </style>
 </head>
 <body>
-  <!-- 顶部提示图片 -->
-  <img src="image.png" alt="Instruction Banner" class="banner" />
-
-  <!-- 留白占位，使内容不被遮住 -->
-  <div class="spacer"></div>
+  <!-- 顶部通知横幅图片 -->
+  <img class="banner" src="image.png" alt="instruction banner" />
 
   <!-- 主体内容 -->
-  <div class="content">
+  <div class="main">
     <div class="instruction">
       Please tap the top right “⋯” and select<br><strong>“Open in browser”</strong><br><br>
       or copy my WhatsApp number:
     </div>
-    <div class="number">+6666666666660</div>
+    <div class="number">+111111111110</div>
     <a class="btn" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
   </div>
 </body>
