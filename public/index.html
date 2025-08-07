@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chat on WhatsApp</title>
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background-color: #fffaf2;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
       text-align: center;
     }
 
+    /* 顶部横幅提示图 */
     .banner {
       width: 100%;
-      max-width: 100%;
       height: auto;
+      display: block;
     }
 
+    /* WhatsApp 内容区域 */
     .content {
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
       padding: 24px 16px;
-      width: 100%;
+      width: 90%;
       max-width: 400px;
-      margin-bottom: 40px;
+      margin: 24px auto;
     }
 
     .instruction {
@@ -59,16 +60,16 @@
   </style>
 </head>
 <body>
-  <!-- 顶部提示图横幅 -->
-  <img src="image.png" alt="Instruction" class="banner" />
+  <!-- 顶部图片横幅 -->
+  <img src="image.png" alt="Instruction Banner" class="banner" />
 
-  <!-- WhatsApp 内容区域 -->
+  <!-- WhatsApp 内容 -->
   <div class="content">
     <div class="instruction">
       Please tap the top right “⋯” and select<br><strong>“Open in browser”</strong><br><br>
       or copy my WhatsApp number:
     </div>
-    <div class="number">+1333333333330</div>
+    <div class="number">+111111111110</div>
     <a class="btn" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
   </div>
 </body>
