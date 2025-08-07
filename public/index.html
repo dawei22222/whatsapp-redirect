@@ -1,71 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Chat on WhatsApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>添加 WhatsApp</title>
   <style>
-    html,body{
-      height:100%;margin:0;padding:0;
-      background:#f8f5f0;
-      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      overflow:hidden;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: url('https://yourdomain.com/background-arrow.jpg') no-repeat center top;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      color: #222;
     }
-    .overlay{
-      position:fixed;
-      top:0;left:0;right:0;
-      padding-top:8vh;
-      background:rgba(0,0,0,0.75);
-      text-align:center;
-      color:#fff;
-      font-size:16px;
-      z-index:99;
-      display:flex;flex-direction:column;align-items:center;
+
+    .container {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      margin-top: 220px; /* 避免遮挡箭头 */
     }
-    .arrow{
-      width:60px;height:60px;margin-top:6px;
+
+    .container h2 {
+      font-size: 20px;
+      margin-bottom: 30px;
     }
-    .main{
-      height:100%;padding-top:30vh;text-align:center;
-      display:flex;flex-direction:column;justify-content:center;
+
+    .whatsapp-number {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 30px;
     }
-    .wa-copy{
-      font-size:1.1rem;color:#666;margin-bottom:15px;
+
+    .button {
+      background-color: #25D366;
+      color: white;
+      font-size: 18px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 40px;
     }
-    .wa-num{
-      font-size:1.6rem;font-weight:bold;color:#111;margin-bottom:25px;
-      user-select:all;
+
+    .button:active {
+      transform: scale(0.97);
     }
-    .wa-btn{
-      position:fixed;bottom:0;left:0;right:0;width:100%;padding:20px 0;
-      background:#25D366;color:#fff;text-decoration:none;font-size:1.2rem;font-weight:bold;
-      box-shadow:0 -2px 8px rgba(0,0,0,0.1);border-radius:8px 8px 0 0;
-    }
-    @media(max-width:380px){
-      .overlay{padding-top:6vh;font-size:14px;}
-      .arrow{width:50px;height:50px;}
-      .main{padding-top:25vh;}
-      .wa-num{font-size:1.4rem;}
-      .wa-btn{padding:15px 0;font-size:1.1rem;}
+
+    @media (max-width: 480px) {
+      .container h2 {
+        font-size: 18px;
+      }
+      .whatsapp-number {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>请点击右上角 <strong>“...”</strong><br>选择 <strong>“在浏览器中打开”</strong></h2>
+    <div class="whatsapp-number">+22222222220</div>
+  </div>
 
-<div class="overlay">
-  <div>Please tap the top right "<b>...</b>" and<br>select "<b>Open in browser</b>"</div>
-  <svg class="arrow" viewBox="0 0 100 100">
-    <path fill="none" stroke="#fff" stroke-width="6" d="M10,90 Q50,10 90,30"/>
-    <polygon fill="#fff" points="85,20 100,35 75,40"/>
-  </svg>
-</div>
-
-<div class="main">
-  <div class="wa-copy">or copy my WhatsApp number:</div>
-  <div class="wa-num">+1234567890</div>
-</div>
-
-<a class="wa-btn" href="https://wa.me/1234567890">Add me on WhatsApp</a>
-
+  <button class="button" onclick="window.location.href='https://wa.me/1234567890'">
+    点此添加 WhatsApp
+  </button>
 </body>
 </html>
