@@ -9,8 +9,6 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: url('./image.png') no-repeat top right;
-      background-size: cover;
       background-color: #fffaf2;
       height: 100vh;
       display: flex;
@@ -18,7 +16,12 @@
       justify-content: flex-end;
       align-items: center;
       text-align: center;
-      padding: 20px;
+    }
+
+    .banner {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
     }
 
     .content {
@@ -56,12 +59,16 @@
   </style>
 </head>
 <body>
+  <!-- 顶部提示图横幅 -->
+  <img src="image.png" alt="Instruction" class="banner" />
+
+  <!-- WhatsApp 内容区域 -->
   <div class="content">
     <div class="instruction">
       Please tap the top right “⋯” and select<br><strong>“Open in browser”</strong><br><br>
       or copy my WhatsApp number:
     </div>
-    <div class="number">+111111111110</div>
+    <div class="number">+1333333333330</div>
     <a class="btn" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
   </div>
 </body>
