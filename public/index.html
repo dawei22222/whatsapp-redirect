@@ -20,14 +20,18 @@
     }
 
     .banner {
-      display: block;
-      max-width: 92%;
-      margin: 16px auto 8px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      z-index: 1000;
     }
 
     .main {
       width: 100%;
-      padding: 0 20px 120px;
+      padding: 120px 20px 120px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -78,11 +82,11 @@
     <div class="instruction">
       You can also copy my WhatsApp number and add me manually:
     </div>
-    <div class="number">+222222222</div>
+    <div class="number">+1111111111</div>
     <div class="tip-near-button">
       Please open this link in your browser and tap the green button below 👇
     </div>
-    <a class="btn" href="https://wa.me/115555551" target="_blank">Click to Add WhatsApp</a>
+    <a class="btn" href="https://wa.me/1111111111" target="_blank">Click to Add WhatsApp</a>
   </div>
 
   <!-- 安卓自动跳转脚本 -->
@@ -96,7 +100,7 @@
     }
 
     if (isAndroid() && !isTikTok()) {
-      window.location.href = 'https://wa.me/666666';
+      window.location.href = 'https://wa.me/1111111111';
     }
   </script>
 
