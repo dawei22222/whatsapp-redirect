@@ -2,64 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chat on WhatsApp</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fffaf2;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 1000;
+    }
+
+    .main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding-top: 20%;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 30px 20px;
-      background-color: #fff;
-      color: #000;
     }
-    .tip-box {
-      background-color: #222;
-      color: #fff;
-      padding: 16px;
-      border-radius: 10px;
-      font-size: 18px;
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-    .note {
+
+    .top-tip {
       font-size: 16px;
-      margin-bottom: 20px;
+      color: #444;
+      margin: 20px;
+      line-height: 1.5;
     }
-    .number {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-    .button {
-      display: inline-block;
-      padding: 14px 24px;
+
+    .instruction {
       font-size: 18px;
+      color: #000;
+      margin: 20px 0 10px;
+    }
+
+    .number {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .button-tip {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      position: absolute;
+      bottom: 30px;
       background-color: #25D366;
-      color: white;
-      border: none;
-      border-radius: 6px;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 8px;
       text-decoration: none;
-      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
-  <div class="tip-box">
-    Please tap the top right “...”<br>
-    and select “Open in browser” <span style="color:red;">↑</span>
+  <!-- 顶部通知横幅图片 -->
+  <img class="banner" src="image.png" alt="instruction banner" />
+
+  <!-- 主体内容 -->
+  <div class="main">
+    <!-- 中部引导词 -->
+    <div class="instruction">
+      You can copy my WhatsApp number and add me:
+    </div>
+
+    <!-- WhatsApp 号码 -->
+    <div class="number">+22222222222220</div>
+
+    <!-- 绿色按钮上方提示语 -->
+    <div class="button-tip">
+      Please open this link in your browser and tap the green button below 👇
+    </div>
+
+    <!-- WhatsApp 按钮 -->
+    <a class="btn" href="https://wa.me/22222222222220" target="_blank">Click to Add WhatsApp</a>
   </div>
 
-  <p class="note">
-    Please open this link in your browser and tap the green button below 👇
-  </p>
+  <!-- 安卓自动跳转逻辑 -->
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    const isAndroid = ua.indexOf("android") > -1;
+    const isTikTok = ua.indexOf("tiktok") > -1;
+    const isIOS = /iphone|ipad|ipod/.test(ua);
 
-  <p class="number">
-    You can copy my WhatsApp number and add me:<br>
-    +22222222220
-  </p>
-
-  <a class="button" href="https://wa.me/1111111110" target="_blank">
-    Click to Add WhatsApp
-  </a>
+    if (isAndroid && !isTikTok) {
+      // 安卓并且不是在 TikTok 内打开，直接跳转 WhatsApp
+      window.location.href = "https://wa.me/22222222222220";
+    }
+    // iOS 或 TikTok 内：不自动跳转，展示引导页面
+  </script>
 </body>
 </html>
