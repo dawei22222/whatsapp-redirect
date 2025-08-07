@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat on WhatsApp</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fffaf2;
+      overflow-x: hidden;
+    }
+
+    .banner {
+      display: block;
+      max-width: 92%;
+      margin: 16px auto 8px;
+    }
+
+    .main {
+      width: 100%;
+      padding: 0 20px 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+    }
+
+    .instruction {
+      font-size: 15px;
+      color: #333;
+      margin-top: 24px;
+    }
+
+    .number {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0 18px;
+    }
+
+    .tip-near-button {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      position: fixed;
+      bottom: 30px;
+      background-color: #25D366;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 500;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部提示图 -->
+  <img class="banner" src="image.png" alt="instruction banner" />
+
+  <!-- 主体内容 -->
+  <div class="main">
+    <div class="instruction">
+      You can also copy my WhatsApp number and add me manually:
+    </div>
+    <div class="number">+111111111111111111</div>
+    <div class="tip-near-button">
+      Please open this link in your browser and tap the green button below 👇
+    </div>
+    <a class="btn" href="https://wa.me/1234567890" target="_blank">Click to Add WhatsApp</a>
+  </div>
+
+  <!-- 安卓自动跳转脚本 -->
+  <script>
+    function isAndroid() {
+      return /android/i.test(navigator.userAgent);
+    }
+
+    function isTikTok() {
+      return /tiktok/i.test(navigator.userAgent);
+    }
+
+    if (isAndroid() && !isTikTok()) {
+      window.location.href = 'https://wa.me/1234567890';
+    }
+  </script>
+
+</body>
+</html>
