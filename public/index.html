@@ -44,13 +44,6 @@
       text-align: center;
     }
 
-    .top-tip {
-      font-size: 16px;
-      color: #444;
-      margin: 20px;
-      line-height: 1.5;
-    }
-
     .instruction {
       font-size: 18px;
       color: #000;
@@ -60,13 +53,13 @@
     .number {
       font-size: 22px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     .button-tip {
       font-size: 16px;
       color: #444;
-      margin-bottom: 20px;
+      margin-bottom: 12px; /* 控制与按钮的距离更紧凑 */
     }
 
     .btn {
@@ -80,6 +73,7 @@
       font-size: 18px;
       font-weight: 500;
     }
+
   </style>
 </head>
 <body>
@@ -94,29 +88,15 @@
     </div>
 
     <!-- WhatsApp 号码 -->
-    <div class="number">+22222222222220</div>
+    <div class="number">+222222222222220</div>
 
-    <!-- 绿色按钮上方提示语 -->
+    <!-- 靠近按钮的提示 -->
     <div class="button-tip">
       Please open this link in your browser and tap the green button below 👇
     </div>
 
     <!-- WhatsApp 按钮 -->
-    <a class="btn" href="https://wa.me/22222222222220" target="_blank">Click to Add WhatsApp</a>
+    <a class="btn" href="https://wa.me/222222222222220" target="_blank">Click to Add WhatsApp</a>
   </div>
-
-  <!-- 安卓自动跳转逻辑 -->
-  <script>
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = ua.indexOf("android") > -1;
-    const isTikTok = ua.indexOf("tiktok") > -1;
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-
-    if (isAndroid && !isTikTok) {
-      // 安卓并且不是在 TikTok 内打开，直接跳转 WhatsApp
-      window.location.href = "https://wa.me/22222222222220";
-    }
-    // iOS 或 TikTok 内：不自动跳转，展示引导页面
-  </script>
 </body>
 </html>
