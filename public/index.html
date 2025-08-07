@@ -11,27 +11,36 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    html, body {
+      width: 100%;
       background-color: #fffaf2;
-      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     }
 
-    /* 顶部横幅提示图 */
+    /* 顶部横幅，强制置顶 */
     .banner {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: auto;
-      display: block;
+      z-index: 999;
     }
 
-    /* WhatsApp 内容区域 */
+    /* 留出空间让内容不被 banner 遮挡 */
+    .spacer {
+      height: auto;
+      margin-top: 130px; /* 这里根据 banner 实际高度微调 */
+    }
+
     .content {
       background-color: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
       padding: 24px 16px;
       width: 90%;
       max-width: 400px;
-      margin: 24px auto;
+      margin: 0 auto 40px auto;
+      text-align: center;
     }
 
     .instruction {
@@ -60,16 +69,19 @@
   </style>
 </head>
 <body>
-  <!-- 顶部图片横幅 -->
+  <!-- 顶部提示图片 -->
   <img src="image.png" alt="Instruction Banner" class="banner" />
 
-  <!-- WhatsApp 内容 -->
+  <!-- 留白占位，使内容不被遮住 -->
+  <div class="spacer"></div>
+
+  <!-- 主体内容 -->
   <div class="content">
     <div class="instruction">
       Please tap the top right “⋯” and select<br><strong>“Open in browser”</strong><br><br>
       or copy my WhatsApp number:
     </div>
-    <div class="number">+111111111110</div>
+    <div class="number">+6666666666660</div>
     <a class="btn" href="https://wa.me/1234567890" target="_blank">Add me on WhatsApp</a>
   </div>
 </body>
