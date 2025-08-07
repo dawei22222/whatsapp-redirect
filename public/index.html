@@ -19,25 +19,16 @@
       border-radius: 10px;
       font-size: 18px;
       margin-bottom: 20px;
-      position: relative;
-    }
-    .tip-box::after {
-      content: '➚';
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%) rotate(-45deg);
-      color: red;
-      font-size: 24px;
+      display: inline-block;
     }
     .note {
       font-size: 16px;
-      margin: 20px 0 10px;
+      margin-bottom: 20px;
     }
     .number {
       font-size: 20px;
       font-weight: bold;
-      margin: 5px 0 20px;
+      margin-bottom: 20px;
     }
     .button {
       display: inline-block;
@@ -55,16 +46,19 @@
 <body>
   <div class="tip-box">
     Please tap the top right “...”<br>
-    and select “Open in browser”
+    and select “Open in browser” <span style="color:red;">↑</span>
   </div>
 
-  <p class="note">Please open this link in your browser and tap the green button below 👇</p>
-
-  <p class="number">You can copy my WhatsApp number and add me:<br>
-    <strong>+1111111110</strong>
+  <p class="note">
+    Please open this link in your browser and tap the green button below 👇
   </p>
 
-  <a class="button" href="https://wa.me/222222222222222220" target="_blank">
+  <p class="number">
+    You can copy my WhatsApp number and add me:<br>
+    +22222222220
+  </p>
+
+  <a class="button" href="https://wa.me/1111111110" target="_blank">
     Click to Add WhatsApp
   </a>
 </body>
