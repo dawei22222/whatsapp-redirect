@@ -6,36 +6,48 @@
   <title>Chat on WhatsApp</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background-color: #fffaf2;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       text-align: center;
-      padding: 30px;
+    }
+    .container {
+      padding: 40px 20px 100px;
     }
     .number {
-      font-size: 22px;
+      font-size: 20px;
+      font-weight: bold;
       margin: 20px 0;
     }
     .btn {
       background-color: #25D366;
       color: white;
+      padding: 14px 28px;
       font-size: 18px;
-      padding: 14px 24px;
       border-radius: 8px;
       text-decoration: none;
       display: inline-block;
-      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h2>Add me on WhatsApp</h2>
-  <div class="number" id="number">+1111111111111</div>
-  <a class="btn" id="btn" href="#">Click to Chat</a>
+  <div class="container">
+    <h2>Chat with me on WhatsApp</h2>
+    <p class="number">+852 4486 0796</p>
 
-  <script>
-    const number = '+11111111111111';
-    document.getElementById('number').textContent = number;
-    document.getElementById('btn').href = 'https://wa.me/' + number.replace('+', '');
-  </script>
+    <!-- 纯 HTML 链接 -->
+    <a class="btn" href="https://wa.me/85244860796" id="chat-link">
+      Click to Chat
+    </a>
+
+    <!-- 后备 JS：非 TikTok 浏览器自动跳转 -->
+    <script>
+      const isTikTok = /tiktok/i.test(navigator.userAgent);
+      if (!isTikTok) {
+        window.location.href = 'https://wa.me/85244860796';
+      }
+    </script>
+  </div>
 </body>
 </html>
