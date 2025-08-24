@@ -5,80 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chat on WhatsApp</title>
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background-color: #fffaf2;
+      overflow-x: hidden;
+    }
+
+    .banner {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .main {
+      width: 100%;
+      padding: 0 20px 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       text-align: center;
     }
-    .banner {
-      width: 100%;
-      display: block;
+
+    .instruction {
+      font-size: 15px;
+      color: #333;
+      margin-top: 24px;
     }
-    .main {
-      padding: 20px;
-    }
+
     .number {
       font-size: 22px;
       font-weight: bold;
-      margin: 16px 0;
+      margin: 10px 0 18px;
     }
-    .tip {
-      font-size: 15px;
+
+    .tip-near-button {
+      font-size: 14px;
       color: #444;
       margin-bottom: 12px;
     }
+
     .btn {
-      display: inline-block;
+      position: fixed;
+      bottom: 30px;
       background-color: #25D366;
       color: #fff;
       padding: 14px 24px;
-      border-radius: 6px;
-      font-size: 18px;
+      border-radius: 8px;
       text-decoration: none;
-      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      left: 50%;
+      transform: translateX(-50%);
     }
   </style>
 </head>
 <body>
 
-  <!-- 顶部图 -->
-  <img class="banner" src="image.png" alt="instruction banner" />
+  <!-- 顶部提示图（如果你想展示 image.png 可以取消注释） -->
+  <!-- <img class="banner" src="image.png" alt="instruction banner" /> -->
 
-  <div class="main" id="content">
-    <!-- 内容将在 JS 中根据环境决定是否显示 -->
+  <div class="main">
+    <div class="instruction">
+      You can also copy my WhatsApp number and add me manually:
+    </div>
+    <div class="number" id="whatsapp-number">+123456789</div>
+    <div class="tip-near-button">
+      Please open this link in your browser and tap the green button below 👇
+    </div>
+    <a class="btn" id="wa-button" href="javascript:void(0);">Click to Add WhatsApp</a>
   </div>
 
   <script>
-    const phoneNumber = '+85244860796';
+    const phoneNumber = '+11111116'; // 统一修改号码
     const waLink = 'https://wa.me/' + phoneNumber.replace('+', '');
 
-    const ua = navigator.userAgent.toLowerCase();
-    const isTikTok = ua.includes('tiktok');
-    const isAndroid = ua.includes('android');
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-    const inApp = isTikTok;
+    // 设置号码展示
+    document.getElementById('whatsapp-number').innerText = phoneNumber;
 
-    const content = document.getElementById('content');
+    // 按钮绑定跳转逻辑
+    document.getElementById('wa-button').addEventListener('click', function () {
+      window.location.href = waLink;
+    });
 
-    if (inApp) {
-      // 在 TikTok 内：提示用户打开浏览器，不能显示跳转按钮
-      content.innerHTML = `
-        <p class="tip">Please tap the top-right corner and choose "Open in Browser" to continue chatting on WhatsApp.</p>
-        <p class="number">${phoneNumber}</p>
-      `;
-    } else {
-      // 外部浏览器：显示按钮 + 自动跳转（Android）
-      content.innerHTML = `
-        <p class="tip">You can copy the number below or tap the button to add on WhatsApp:</p>
-        <p class="number">${phoneNumber}</p>
-        <a href="${waLink}" class="btn" target="_blank">Click to Chat on WhatsApp</a>
-      `;
+    // 判断系统环境
+    function isAndroid() {
+      return /android/i.test(navigator.userAgent);
+    }
 
-      if (isAndroid) {
-        window.location.href = waLink;
-      }
+    function isTikTok() {
+      return /tiktok/i.test(navigator.userAgent);
+    }
+
+    // 安卓非 TikTok 直接跳转
+    if (isAndroid() && !isTikTok()) {
+      window.location.href = waLink;
     }
   </script>
 
