@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat on WhatsApp</title>
+  <meta charset="UTF-8">
+  <title>Click to Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       background-color: #fffaf2;
@@ -13,34 +13,40 @@
       text-align: center;
     }
     .container {
-      padding: 40px 20px 100px;
+      padding: 60px 20px 100px;
+    }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
     }
     .btn {
       background-color: #25D366;
       color: white;
-      padding: 14px 28px;
+      padding: 16px 32px;
       font-size: 18px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
       display: inline-block;
     }
     .tip {
-      margin: 20px 0;
-      font-size: 15px;
-      color: #444;
+      font-size: 14px;
+      color: #666;
+      margin-top: 24px;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Chat with me on WhatsApp</h2>
-
-    <div class="tip">If nothing happens, please click the green button below:</div>
-
-    <!-- 纯 HTML 跳转链接，避免任何 JS -->
-    <a class="btn" href="https://wa.me/85244860796" target="_blank">
-      Click to Open WhatsApp
-    </a>
+    <div class="title">Chat with me on WhatsApp</div>
+    <a class="btn" href="https://wa.me/85244860796" target="_blank">Click to Open WhatsApp</a>
+    <div class="tip">
+      If you cannot open WhatsApp directly,<br>
+      please click the three dots on the top right,<br>
+      then choose “Open in browser”.
+    </div>
   </div>
 </body>
 </html>
