@@ -1,51 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Click to Chat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat on WhatsApp</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      background-color: #fffaf2;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fffaf2;
       text-align: center;
     }
-    .container {
-      padding: 60px 20px 100px;
+
+    .banner {
+      width: 100%;
+      display: block;
     }
-    .title {
+
+    .container {
+      padding: 20px;
+    }
+
+    .number {
       font-size: 20px;
       font-weight: bold;
-      margin-bottom: 20px;
-      color: #333;
+      margin: 16px 0;
+      color: #222;
     }
+
     .btn {
       background-color: #25D366;
       color: white;
-      padding: 16px 32px;
+      padding: 14px 30px;
       font-size: 18px;
-      border-radius: 10px;
+      border-radius: 8px;
       text-decoration: none;
       display: inline-block;
+      margin-top: 20px;
     }
+
     .tip {
       font-size: 14px;
-      color: #666;
-      margin-top: 24px;
-      line-height: 1.6;
+      color: #444;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+  <img class="banner" src="image.png" alt="Instruction Image" />
   <div class="container">
-    <div class="title">Chat with me on WhatsApp</div>
-    <a class="btn" href="https://wa.me/85244860796" target="_blank">Click to Open WhatsApp</a>
+    <div class="number">+852 4486 0796</div>
+    <a class="btn" href="https://wa.me/85244860796" target="_blank">Click to Add on WhatsApp</a>
     <div class="tip">
-      If you cannot open WhatsApp directly,<br>
-      please click the three dots on the top right,<br>
-      then choose “Open in browser”.
+      If the button doesn't respond,<br />
+      Tap the 3 dots in the upper right corner,<br />
+      Then choose “Open in browser”.
     </div>
   </div>
 </body>
