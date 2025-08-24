@@ -10,84 +10,93 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     html, body {
       width: 100%;
-      height: 100vh;
+      height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background-color: #fffaf2;
-      overflow-x: hidden;
     }
+
     .banner {
-      display: block;
       width: 100%;
-      max-width: 100%;
       height: auto;
+      display: block;
     }
+
     .main {
-      width: 100%;
-      padding: 0 20px 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
       text-align: center;
+      padding: 20px;
     }
+
     .instruction {
       font-size: 15px;
-      color: #333;
       margin-top: 24px;
+      color: #333;
     }
+
     .number {
       font-size: 22px;
       font-weight: bold;
       margin: 10px 0 18px;
     }
+
     .tip-near-button {
       font-size: 14px;
       color: #444;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
+
     .btn {
-      position: fixed;
-      bottom: 30px;
       background-color: #25D366;
-      color: #fff;
+      color: white;
       padding: 14px 24px;
       border-radius: 8px;
-      text-decoration: none;
       font-size: 18px;
-      font-weight: 500;
-      left: 50%;
-      transform: translateX(-50%);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .tiktok-warning {
+      font-size: 14px;
+      color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <!-- 顶部提示图 -->
-  <img class="banner" src="image.png" alt="instruction banner" />
+  <img class="banner" src="./image.png" alt="instruction" />
 
-  <!-- 主体内容 -->
   <div class="main">
     <div class="instruction">You can also copy my WhatsApp number and add me manually:</div>
-    <div class="number" id="whatsapp-number">+111111111111111</div>
+    <div class="number" id="whatsapp-number">+123456789</div>
     <div class="tip-near-button">Please open this link in your browser and tap the green button below 👇</div>
     <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
+    <div class="tiktok-warning" id="tiktok-msg" style="display:none;">
+      TikTok internal browser may block the page. Please click the "..." in the top right corner, then open in browser.
+    </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
-    const phoneNumber = '+111111111111';
-    document.getElementById('whatsapp-number').innerText = phoneNumber;
-    document.getElementById('wa-button').href = 'https://wa.me/' + phoneNumber.replace('+', '');
+    const phoneNumber = '+85244860796';
+    const button = document.getElementById('wa-button');
+    const numberDisplay = document.getElementById('whatsapp-number');
+    const tiktokMsg = document.getElementById('tiktok-msg');
 
-    // 安卓非 TikTok 自动跳转
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = ua.includes('android');
-    const isTikTok = ua.includes('tiktok');
-    
-    if (isAndroid && !isTikTok) {
-      window.location.href = 'https://wa.me/' + phoneNumber.replace('+', '');
+    // 设置号码
+    numberDisplay.textContent = phoneNumber;
+    button.href = 'https://wa.me/' + phoneNumber.replace('+', '');
+
+    // 判断是否是 TikTok 浏览器
+    function isTikTok() {
+      return navigator.userAgent.toLowerCase().includes('tiktok');
     }
+
+    window.onload = function () {
+      if (isTikTok()) {
+        tiktokMsg.style.display = 'block';
+      }
+    };
   </script>
 </body>
 </html>
