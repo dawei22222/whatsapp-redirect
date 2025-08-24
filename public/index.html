@@ -3,82 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat on WhatsApp</title>
+  <title>Open in Browser to Continue</title>
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #fffaf2;
       text-align: center;
     }
-
     .banner {
       width: 100%;
       max-width: 100%;
       display: block;
     }
-
     .main {
-      padding: 24px;
+      padding: 20px;
     }
-
     .number {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
-      margin: 20px 0;
+      margin: 16px 0;
     }
-
     .tip {
       font-size: 16px;
+      margin: 12px 0;
       color: #444;
-      margin-bottom: 30px;
     }
-
     .btn {
       display: inline-block;
+      padding: 14px 24px;
       background-color: #25D366;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 6px;
+      color: white;
       font-size: 18px;
       text-decoration: none;
+      border-radius: 6px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-
-  <img src="image.png" class="banner" alt="Open in Browser Tip" />
-
-  <div class="main" id="content"></div>
+  <img class="banner" src="image.png" alt="Open in Browser Tip" />
+  <div class="main" id="main"></div>
 
   <script>
-    const phoneNumber = '+11111111111';
-    const waLink = 'https://wa.me/' + phoneNumber.replace('+', '');
     const ua = navigator.userAgent.toLowerCase();
-    const isTikTok = ua.includes('tiktok');
-    const isAndroid = ua.includes('android');
+    const isTikTok = ua.includes("tiktok");
+    const phone = "+811111111111111111111";
+    const link = "https://wa.me/" + phone.replace("+", "");
 
-    const content = document.getElementById('content');
+    const main = document.getElementById("main");
 
     if (isTikTok) {
-      // 在 TikTok 内部浏览器中，不跳转、不显示按钮，只提示
-      content.innerHTML = `
-        <p class="tip">Please tap the "..." in the top-right corner and select "Open in Browser".</p>
-        <div class="number">${phoneNumber}</div>
+      // 在 TikTok 中，仅提示，不跳转
+      main.innerHTML = `
+        <p class="tip">Please tap the "..." in the top-right corner</p>
+        <p class="tip">Then choose "Open in Browser"</p>
+        <p class="number">${phone}</p>
       `;
     } else {
-      // 非 TikTok 中（如浏览器），显示按钮并跳转
-      content.innerHTML = `
-        <p class="tip">Tap the button below to chat with me on WhatsApp:</p>
-        <div class="number">${phoneNumber}</div>
-        <a class="btn" href="${waLink}" target="_blank">Click to Add WhatsApp</a>
-      `;
-
-      if (isAndroid) {
-        window.location.href = waLink;
-      }
+      // 非 TikTok 中（浏览器内）→ 自动跳转
+      window.location.href = link;
     }
   </script>
-
 </body>
 </html>
