@@ -3,100 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat on WhatsApp</title>
+  <title>Please Open in Browser</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      background: #fffaf2;
+      font-family: sans-serif;
+      text-align: center;
     }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: #fffaf2;
-    }
-
     .banner {
       width: 100%;
       height: auto;
-      display: block;
     }
-
-    .main {
-      text-align: center;
+    .text {
+      font-size: 16px;
       padding: 20px;
-    }
-
-    .instruction {
-      font-size: 15px;
-      margin-top: 24px;
-      color: #333;
-    }
-
-    .number {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 10px 0 18px;
-    }
-
-    .tip-near-button {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 16px;
-    }
-
-    .btn {
-      background-color: #25D366;
-      color: white;
-      padding: 14px 24px;
-      border-radius: 8px;
-      font-size: 18px;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .tiktok-warning {
-      font-size: 14px;
-      color: red;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <img class="banner" src="./image.png" alt="instruction" />
-
-  <div class="main">
-    <div class="instruction">You can also copy my WhatsApp number and add me manually:</div>
-    <div class="number" id="whatsapp-number">+123456789</div>
-    <div class="tip-near-button">Please open this link in your browser and tap the green button below 👇</div>
-    <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
-    <div class="tiktok-warning" id="tiktok-msg" style="display:none;">
-      TikTok internal browser may block the page. Please click the "..." in the top right corner, then open in browser.
-    </div>
+  <img class="banner" src="arrow-tip.png" alt="open in browser tip" />
+  <div class="text">
+    Please click the top right corner <b>"..."</b><br />
+    Then choose <b>"Open in browser"</b><br /><br />
+    After opening in browser, you can add me on WhatsApp.
   </div>
 
   <script>
-    const phoneNumber = '+85244860796';
-    const button = document.getElementById('wa-button');
-    const numberDisplay = document.getElementById('whatsapp-number');
-    const tiktokMsg = document.getElementById('tiktok-msg');
-
-    // 设置号码
-    numberDisplay.textContent = phoneNumber;
-    button.href = 'https://wa.me/' + phoneNumber.replace('+', '');
-
-    // 判断是否是 TikTok 浏览器
-    function isTikTok() {
-      return navigator.userAgent.toLowerCase().includes('tiktok');
+    // 自动跳转到真正页面（非TikTok环境）
+    if (!/tiktok/i.test(navigator.userAgent)) {
+      window.location.href = './wa.html';
     }
-
-    window.onload = function () {
-      if (isTikTok()) {
-        tiktokMsg.style.display = 'block';
-      }
-    };
   </script>
 </body>
 </html>
