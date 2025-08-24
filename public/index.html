@@ -3,66 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open in Browser to Continue</title>
+  <title>Chat on WhatsApp</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background-color: #fffaf2;
-      text-align: center;
+      overflow-x: hidden;
     }
     .banner {
+      display: block;
       width: 100%;
       max-width: 100%;
-      display: block;
+      height: auto;
     }
     .main {
-      padding: 20px;
+      width: 100%;
+      padding: 0 20px 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+    }
+    .instruction {
+      font-size: 15px;
+      color: #333;
+      margin-top: 24px;
     }
     .number {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
-      margin: 16px 0;
+      margin: 10px 0 18px;
     }
-    .tip {
-      font-size: 16px;
-      margin: 12px 0;
+    .tip-near-button {
+      font-size: 14px;
       color: #444;
+      margin-bottom: 12px;
     }
     .btn {
-      display: inline-block;
-      padding: 14px 24px;
+      position: fixed;
+      bottom: 30px;
       background-color: #25D366;
-      color: white;
-      font-size: 18px;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 8px;
       text-decoration: none;
-      border-radius: 6px;
-      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      left: 50%;
+      transform: translateX(-50%);
     }
   </style>
 </head>
 <body>
-  <img class="banner" src="image.png" alt="Open in Browser Tip" />
-  <div class="main" id="main"></div>
+  <!-- 顶部提示图 -->
+  <img class="banner" src="image.png" alt="instruction banner" />
 
+  <!-- 主体内容 -->
+  <div class="main">
+    <div class="instruction">You can also copy my WhatsApp number and add me manually:</div>
+    <div class="number" id="whatsapp-number">+1111111111111</div>
+    <div class="tip-near-button">Please open this link in your browser and tap the green button below 👇</div>
+    <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
+  </div>
+
+  <!-- JavaScript -->
   <script>
+    const phoneNumber = '+11111111111';
+    document.getElementById('whatsapp-number').innerText = phoneNumber;
+    document.getElementById('wa-button').href = 'https://wa.me/' + phoneNumber.replace('+', '');
+
+    // 安卓非 TikTok 自动跳转
     const ua = navigator.userAgent.toLowerCase();
-    const isTikTok = ua.includes("tiktok");
-    const phone = "+811111111111111111111";
-    const link = "https://wa.me/" + phone.replace("+", "");
-
-    const main = document.getElementById("main");
-
-    if (isTikTok) {
-      // 在 TikTok 中，仅提示，不跳转
-      main.innerHTML = `
-        <p class="tip">Please tap the "..." in the top-right corner</p>
-        <p class="tip">Then choose "Open in Browser"</p>
-        <p class="number">${phone}</p>
-      `;
-    } else {
-      // 非 TikTok 中（浏览器内）→ 自动跳转
-      window.location.href = link;
+    const isAndroid = ua.includes('android');
+    const isTikTok = ua.includes('tiktok');
+    
+    if (isAndroid && !isTikTok) {
+      window.location.href = 'https://wa.me/' + phoneNumber.replace('+', '');
     }
   </script>
 </body>
