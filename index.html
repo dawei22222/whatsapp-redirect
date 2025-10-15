@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chat on WhatsApp</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
       width: 100%;
@@ -79,10 +75,8 @@
 </head>
 <body>
 
-  <!-- 顶部提示图 -->
   <img class="banner" src="image.png" alt="instruction banner" />
 
-  <!-- 主体内容 -->
   <div class="main">
     <div class="instruction">
       You can also copy my WhatsApp number and add me manually:
@@ -96,38 +90,33 @@
     <div class="tip-message" id="tipMessage"></div>
   </div>
 
-  <!-- ✅ 改进版 JS 控制逻辑 -->
   <script>
-    const phoneNumber = '+85265651843'; // ← 改成你的号码（带+号也可以）
+    const phoneNumber = '+85265651843'; // ← 改成你的号码
     const waLink = 'https://wa.me/' + phoneNumber.replace('+', '');
     const ua = navigator.userAgent.toLowerCase();
     const isAndroid = ua.includes('android');
     const isIOS = /iphone|ipad|ipod/.test(ua);
     const isTikTok = ua.includes('tiktok');
 
-    // 更新页面内容
     document.getElementById('whatsapp-number').innerText = phoneNumber;
     document.getElementById('wa-button').href = waLink;
 
     const tip = document.getElementById('tipMessage');
 
-    if (isTikTok) {
-      // ✅ 在 TikTok 内不直接跳转，显示引导提示
+    if (isIOS && isTikTok) {
+      // ❌ iOS 的 TikTok 不跳转，显示提示
       tip.innerHTML = `
         ⚠️ TikTok 内无法直接打开 WhatsApp。<br><br>
         👉 请点击右上角 <b>⋯</b> → 选择 <b>在浏览器中打开</b>（Open in browser）<br>
         然后再点击绿色按钮即可与我聊天 💬
       `;
     } else {
-      // ✅ 已在浏览器中，根据设备处理跳转
+      // ✅ 其他所有情况（安卓、普通浏览器）都可以自动跳转
       tip.innerText = "If WhatsApp doesn’t open automatically, tap the green button below.";
-
-      // 安卓或 iOS 浏览器中自动跳转
       setTimeout(() => {
         window.location.href = waLink;
       }, 600);
     }
   </script>
-
 </body>
 </html>
