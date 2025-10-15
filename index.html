@@ -2,121 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat on WhatsApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Let's Chat on WhatsApp 💬</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: #fffaf2;
-      overflow-x: hidden;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #fff;
+      color: #333;
     }
-
-    .banner {
-      display: block;
-      width: 100%;
+    .tip {
+      display: none;
+    }
+    .tip img {
       max-width: 100%;
       height: auto;
+      margin-top: 20px;
     }
-
-    .main {
-      width: 100%;
-      padding: 0 20px 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      text-align: center;
-    }
-
-    .instruction {
-      font-size: 15px;
-      color: #333;
-      margin-top: 24px;
-    }
-
-    .number {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 10px 0 18px;
-    }
-
-    .tip-near-button {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-
     .btn {
-      position: fixed;
-      bottom: 30px;
-      background-color: #25D366;
-      color: #fff;
-      padding: 14px 24px;
+      background-color: #25d366;
+      color: white;
+      padding: 14px 28px;
+      border: none;
       border-radius: 8px;
-      text-decoration: none;
       font-size: 18px;
-      font-weight: 500;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .tip-message {
-      margin-top: 16px;
-      color: #555;
-      font-size: 15px;
-      line-height: 1.6;
+      cursor: pointer;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
+  <h2>💌 Let's continue on WhatsApp</h2>
+  <p>If it doesn’t open automatically, please tap the button below 👇</p>
+  <button class="btn" id="chatBtn">Open WhatsApp</button>
 
-  <img class="banner" src="image.png" alt="instruction banner" />
-
-  <div class="main">
-    <div class="instruction">
-      You can also copy my WhatsApp number and add me manually:
-    </div>
-    <div class="number" id="whatsapp-number">+123456789</div>
-    <div class="tip-near-button">
-      Please open this link in your browser and tap the green button below 👇
-    </div>
-    <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
-
-    <div class="tip-message" id="tipMessage"></div>
+  <div class="tip" id="iosTip">
+    <p>📱 Please open this page in Safari first, then tap “Open WhatsApp”</p>
+    <img src="arrow-tip.png" alt="Open in Safari">
   </div>
 
   <script>
-    const phoneNumber = '+85265651843'; // ← 改成你的号码
-    const waLink = 'https://wa.me/' + phoneNumber.replace('+', '');
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = ua.includes('android');
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-    const isTikTok = ua.includes('tiktok');
-
-    document.getElementById('whatsapp-number').innerText = phoneNumber;
-    document.getElementById('wa-button').href = waLink;
-
-    const tip = document.getElementById('tipMessage');
+    const waLink = "https://wa.me/12135557788"; // <--- 在这里改你的 WhatsApp 号码
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isTikTok = /tiktok/.test(userAgent);
 
     if (isIOS && isTikTok) {
-      // ❌ iOS 的 TikTok 不跳转，显示提示
-      tip.innerHTML = `
-        ⚠️ TikTok 内无法直接打开 WhatsApp。<br><br>
-        👉 请点击右上角 <b>⋯</b> → 选择 <b>在浏览器中打开</b>（Open in browser）<br>
-        然后再点击绿色按钮即可与我聊天 💬
-      `;
+      // 苹果 + TikTok 内：不跳转，显示提示图
+      document.getElementById("iosTip").style.display = "block";
     } else {
-      // ✅ 其他所有情况（安卓、普通浏览器）都可以自动跳转
-      tip.innerText = "If WhatsApp doesn’t open automatically, tap the green button below.";
-      setTimeout(() => {
-        window.location.href = waLink;
-      }, 600);
+      // 其他设备自动跳转
+      window.location.href = waLink;
     }
+
+    // 按钮点击手动跳转（防止部分浏览器阻拦）
+    document.getElementById("chatBtn").addEventListener("click", () => {
+      window.location.href = waLink;
+    });
   </script>
 </body>
 </html>
