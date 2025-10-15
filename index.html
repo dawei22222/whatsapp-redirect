@@ -1,123 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat on WhatsApp</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: #fffaf2;
-      overflow-x: hidden;
-    }
-
-    .banner {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-    }
-
-    .main {
-      width: 100%;
-      padding: 0 20px 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      text-align: center;
-    }
-
-    .instruction {
-      font-size: 15px;
-      color: #333;
-      margin-top: 24px;
-    }
-
-    .number {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 10px 0 18px;
-    }
-
-    .tip-near-button {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 12px;
-    }
-
-    .btn {
-      position: fixed;
-      bottom: 30px;
-      background-color: #25D366;
-      color: #fff;
-      padding: 14px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 500;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chat on WhatsApp</title>
+<style>
+  body {
+    text-align: center;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+  }
+  .btn {
+    display: inline-block;
+    background: #25d366;
+    color: white;
+    padding: 14px 26px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+</style>
 </head>
 <body>
-
-  <img class="banner" src="image.png" alt="instruction banner" />
-
-  <div class="main">
-    <div class="instruction">
-      You can also copy my WhatsApp number and add me manually:
-    </div>
-    <div class="number" id="whatsapp-number">+85265651843</div>
-    <div class="tip-near-button">
-      Please open this link in your browser and tap the green button below 👇
-    </div>
-    <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
-  </div>
+  <h2>💬 Let's chat on WhatsApp</h2>
+  <p>If the page doesn’t open automatically, tap below 👇</p>
+  <a id="chatBtn" class="btn">Open WhatsApp</a>
 
   <script>
-    const phoneNumber = '+85265651843'; // 修改号码
-    const cleanNumber = phoneNumber.replace(/\D/g, '');
-    const waDeepLink = `whatsapp://send?phone=${cleanNumber}`;
-    const waWebLink = `https://wa.me/${cleanNumber}`;
+    const phone = "85265651843"; // ← 改成你的号码（不要加+号）
+    const message = "Hi, I saw you on TikTok 👋"; // ← 可自定义消息
+    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const intentUrl = `intent://send/${phone}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
 
-    document.getElementById('whatsapp-number').innerText = phoneNumber;
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isTikTok = /TikTok/i.test(navigator.userAgent);
 
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = /android/i.test(ua);
-    const isTikTok = /tiktok/i.test(ua);
-    const isIOS = /iphone|ipad|ipod/i.test(ua);
+    document.getElementById("chatBtn").href = waUrl;
 
-    const waButton = document.getElementById('wa-button');
-    waButton.href = waWebLink;
-
-    // ✅ 安卓端：自动尝试唤起 WhatsApp
-    if (isAndroid && !isTikTok) {
-      // 延时执行，防止页面未加载完毕
+    if (isAndroid) {
+      // 安卓端尝试优先使用 intent 协议
       setTimeout(() => {
-        const start = Date.now();
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = waDeepLink;
-        document.body.appendChild(iframe);
-
-        // 如果 1 秒后 WhatsApp 没有被唤起，则跳到网页版
-        setTimeout(() => {
-          const elapsed = Date.now() - start;
-          if (elapsed < 1500) {
-            window.location.href = waWebLink;
-          }
-        }, 1000);
-      }, 600);
+        window.location.href = intentUrl;
+      }, 300);
+    } else {
+      // 其他平台
+      window.location.href = waUrl;
     }
-
-    // iOS & TikTok 内展示提示图，不自动跳转
   </script>
-
 </body>
 </html>
