@@ -86,26 +86,28 @@
     <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
   </div>
 
-  <!-- JavaScript 动态插入号码 -->
+  <!-- JS 控制跳转逻辑 -->
   <script>
-    const phoneNumber = '+85265651843'; // ⚠️ 在这里统一修改号码
+    const phoneNumber = '+1234532434'; // ← 修改此处号码
+    const cleanNumber = phoneNumber.replace(/\D/g, '');
+    const waLink = 'https://wa.me/' + cleanNumber;
+    const waIntent = `intent://send?phone=${cleanNumber}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
 
-    // 设置显示和跳转链接
     document.getElementById('whatsapp-number').innerText = phoneNumber;
-    document.getElementById('wa-button').href = 'https://wa.me/' + phoneNumber.replace('+', '');
+    document.getElementById('wa-button').href = waLink;
 
-    // 安卓设备自动跳转（非 TikTok）
-    function isAndroid() {
-      return /android/i.test(navigator.userAgent);
+    const ua = navigator.userAgent.toLowerCase();
+    const isAndroid = /android/i.test(ua);
+    const isTikTok = /tiktok/i.test(ua);
+    const isIOS = /iphone|ipad|ipod/i.test(ua);
+
+    // 安卓非 TikTok，自动跳转至 WhatsApp
+    if (isAndroid && !isTikTok) {
+      // 使用 intent 协议防止跳转到下载页面
+      window.location.href = waIntent;
     }
 
-    function isTikTok() {
-      return /tiktok/i.test(navigator.userAgent);
-    }
-
-    if (isAndroid() && !isTikTok()) {
-      window.location.href = 'https://wa.me/' + phoneNumber.replace('+', '');
-    }
+    // iOS / TikTok 内保持原逻辑（展示提示图+按钮）
   </script>
 
 </body>
