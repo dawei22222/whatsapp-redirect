@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chat on WhatsApp</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     html, body {
       width: 100%;
@@ -67,8 +71,10 @@
 </head>
 <body>
 
+  <!-- 顶部提示图 -->
   <img class="banner" src="image.png" alt="instruction banner" />
 
+  <!-- 主体内容 -->
   <div class="main">
     <div class="instruction">
       You can also copy my WhatsApp number and add me manually:
@@ -80,34 +86,29 @@
     <a class="btn" id="wa-button" href="#" target="_blank">Click to Add WhatsApp</a>
   </div>
 
+  <!-- JS 控制跳转逻辑 -->
   <script>
-    const phoneNumber = '+85265651843'; // 修改号码
+    const phoneNumber = '85265651843'; // ← 修改此处号码
     const cleanNumber = phoneNumber.replace(/\D/g, '');
-    const waDeepLink = `whatsapp://send?phone=${cleanNumber}`;
-    const waWebLink = `https://wa.me/${cleanNumber}`;
+    const waLink = 'https://wa.me/' + cleanNumber;
+    const waIntent = `intent://send?phone=${cleanNumber}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
 
     document.getElementById('whatsapp-number').innerText = phoneNumber;
+    document.getElementById('wa-button').href = waLink;
 
     const ua = navigator.userAgent.toLowerCase();
     const isAndroid = /android/i.test(ua);
     const isTikTok = /tiktok/i.test(ua);
     const isIOS = /iphone|ipad|ipod/i.test(ua);
 
-    const waButton = document.getElementById('wa-button');
-    waButton.href = waWebLink;
-
-    // ✅ 安卓端：自动尝试唤起 WhatsApp
+    // 安卓非 TikTok，自动跳转至 WhatsApp
     if (isAndroid && !isTikTok) {
-      // 延时执行，防止页面未加载完毕
-      setTimeout(() => {
-        const start = Date.now();
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = waDeepLink;
-        document.body.appendChild(iframe);
+      // 使用 intent 协议防止跳转到下载页面
+      window.location.href = waIntent;
+    }
 
-        // 如果 1 秒后 WhatsApp 没有被唤起，则跳到网页版
-        setTimeout(() => {
-          const elapsed = Date.now() - start;
-          if (elapsed < 1500) {
-            window.location.
+    // iOS / TikTok 内保持原逻辑（展示提示图+按钮）
+  </script>
+
+</body>
+</html>
